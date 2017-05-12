@@ -11,12 +11,11 @@
   $query2    = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' and password_user = '$pass'");
   $result2   = mysqli_fetch_array($query2);
 
-
-	if ($result1 || $result2) {
+	if ($result1 || $result2 && $otoritas) {
 		$_SESSION['id']     = $result1['name_user'];
 		$_SESSION['status'] = "User";
 ?>
-		<script>document.location.href='../homepage/homepage.php';</script>
+		<script>document.location.href='../homepage/dashboard.php';</script>
 <?php
 	}
 	else{
