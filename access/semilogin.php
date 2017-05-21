@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include "../connect.php";
 
   $email        = $_POST['email'];
@@ -8,7 +9,7 @@
   $result   = mysqli_fetch_array($query);
 
 	if ($result) {
-		$_SESSION['id']     = $result['email_user'];
+		$_SESSION['id']     = $result['email_admin'];
 		$_SESSION['status'] = "User";
 ?>
 		<script>document.location.href='../resetpassword.php';</script>

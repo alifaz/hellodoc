@@ -46,9 +46,6 @@
       <!-- Transparent Navbar -->
       <div id="nav-header" class="container clearfix">
         <img alt="Hello, Doc!" class="pull-left" src="img/Login/Logo.png" width="160" height="100">
-        <button id="login_button" class="on-login btn btn-link form-switch pull-right"
-        data-form="login-page" data-toggle="modal"  style="background-color:#52e829; color: #fff; border:1px solid;"
-        data-label="top-right" href="index.php#signinModal" style="margin">sign in</button>
       </div>
 
       <!-- Logo -->
@@ -89,36 +86,28 @@
 
       <!-- Modal Section -->
 
-      <!-- Sign Up Form -->
+      <!-- login Form -->
 	     <div id="signup-page">
 	  	     <div class="container">
 
-		      <form class="transparent form-login" style="background-color:transparent;" action="access/inputproccessadmin.php" method="post">
-            <form action="access/inputproccessadmin.php" method="post">
+		      <form class="transparent form-login" style="background-color:transparent;" action="access/loginproccessadmin.php" method="post">
+            <form action="access/loginproccessadmin.php" method="post">
 		            <div class="login-wrap">
-                  <input type="text" class="form-control" placeholder="Full Name" name="name" width="312" height="52" autofocus>
-                  <br>
-                  <input type="text" class="form-control" placeholder="Email" name="email" width="312" height="52" autofocus>
+                  <input type="text" class="form-control" placeholder="Email" name="email" autofocus>
                   <br>
                   <input type="password" class="form-control" placeholder="Password" name="psw">
-                  <br>
-                  <input type="password" class="form-control" placeholder="uniquecode" name="psw">
-		                <label class="checkbox">
-		                  </label>
-		                    <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i>
-                          <b>Be An Admin</b></button>
-		                        <hr>
+                  <label class="checkbox">
+                      <span class="pull-right">
+                          <a data-toggle="modal" class="on-login btn btn-link form-switch pull-right"
+                          data-form="login-page" data-label="top-right" href="index.php#myModal"
+                          onclick="document.getElementById('signinModal').style.display='none'" data-dismiss="modal">
+                          Forgot Password?</a>
 
-		                          <div class="registration">
-		                              Already have an account?<br/>
-		                                <a  id="login_button2" class="form-switch"
-                                    data-form="login-page" data-toggle="modal"  data-label="top-right" href="index.php#signinModal">
-		                                  <b>
-                                        Sign in
-                                      </b>
-		                                </a>
-		                          </div>
-		           </div>
+                      </span>
+                  </label>
+		                    <button class="btn btn-theme btn-block" href="admin-rs.index.html" type="submit"><i class="fa fa-lock"></i>
+                          <b>Admin Login</b></button>
+		            </div>
              </form>
 
 		          <!-- Forgot Modal -->
@@ -145,94 +134,6 @@
                 </form>
 		          </div>
 		          <!-- modal -->
-
-              <!-- Signup Modal -->
-		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="signupModal" class="modal fade">
-                <form action="access/inputproccessadmin.php" method="post">
-                  <div class="modal-dialog">
-		                  <div class="modal-content">
-		                      <div class="modal-header">
-		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                          <h2 class="modal-title"><center>Sign up</center></h2>
-		                      </div>
-		                      <div class="modal-body">
-                		        <div class="login-wrap">
-                              <input type="text" class="form-control" placeholder="Full Name" name="name" width="312" height="52" autofocus>
-                              <br>
-                              <input type="text" class="form-control" placeholder="Email" name="email" width="312" height="52" autofocus>
-                              <br>
-                              <input type="password" class="form-control" placeholder="Password" name="psw">
-                              <br>
-                              <input type="password" class="form-control" placeholder="uniquecode" name="psw">
-              		            <label class="checkbox">
-              		            </label>
-              		            <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i>
-                                <b>Be An Admin</b></button>
-              		            <hr>
-
-                                <div class="registration">
-                		                Already have an account?<br/>
-                                      <a data-toggle="modal" class="on-login btn btn-link form-switch"
-                                      data-form="login-page" data-label="top-right" href="index.php#signinModal"
-                                      onclick="document.getElementById('signinModal').style.display='none'" data-dismiss="modal">
-                		                      Sign In
-                		                  </a>
-                		            </div>
-
-                		        </div>
-
-		                      </div>
-		                  </div>
-		              </div>
-                </form>
-		          </div>
-
-              <!-- Login Modal -->
-		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="signinModal" class="transparent modal fade">
-                <form action="access/loginproccess.php" method="post">
-		              <div class="modal-dialog">
-		                  <div class="modal-content">
-		                      <div class="modal-header">
-		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                          <h2 class="modal-title"><center>Sign in</center></h2>
-		                      </div>
-		                      <div class="modal-body">
-                		        <div class="login-wrap">
-                		            <input type="text" class="form-control" placeholder="Username or Email" name="username" autofocus>
-                		            <br>
-                		            <input type="password" class="form-control" placeholder="Password" name="psw">
-                                <br>
-                                <input type="password" class="form-control" placeholder="Special Code" name="specialcode">
-                		            <label class="checkbox">
-                		                <span class="pull-right">
-                		                    <a data-toggle="modal" class="on-login btn btn-link form-switch pull-right"
-                                        data-form="login-page" data-label="top-right" href="index.php#myModal"
-                                        onclick="document.getElementById('signinModal').style.display='none'" data-dismiss="modal">
-                                        Forgot Password?</a>
-
-                		                </span>
-                		            </label>
-                		            <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> Log In</button>
-                		            <hr>
-
-                		            <div class="registration">
-                		                Don't have an account yet?<br/>
-                                    <a data-toggle="modal" class="on-login btn btn-link form-switch"
-                                    data-form="login-page" data-label="top-right" href="index.php#signupModal"
-                                    onclick="document.getElementById('signinModal').style.display='none'" data-dismiss="modal">
-                		                    Create an account
-                		                </a>
-                		            </div>
-
-                		        </div>
-
-		                      </div>
-		                  </div>
-		              </div>
-                </form>
-		          </div>
-		          <!-- modal -->
-
 
 		      </form>
 

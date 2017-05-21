@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-  require_once "head-user.php";
- ?>
+	require_once "head-user.php";
+	require_once "header-user.php";
+		include "../connect.php";
 
+	  $username_cek  = $_SESSION['username'];
+	  $password_cek  = $_SESSION['password'];
+
+	  $query     = mysqli_query($conn, "SELECT * FROM user WHERE user_name = '$username_cek' and password_user = '$password_cek'");
+	  $result    = mysqli_fetch_array($query);
+	  $_SESSION['name'] = $result['name_user'];
+ ?>
+<title>Spesialis Jantung</title>
   <body>
 
   <section id="container" >
-      <!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
-      <!--header start-->
-      <?php
-        require_once "header-user.php";
-       ?>
-      <!--header end-->
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN SIDEBAR MENU
-      *********************************************************************************************************************************************************** -->
-      <!--sidebar start-->
-      <aside>
+          <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
               	  <p class="centered"><a href="profile.html"><img src="opan.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">M. Ghofar<br>Pasien</h5>
+              	  <h5 class="centered"><?php echo $_SESSION['name']; ?><br>Pasien</h5>
 
                   <li class="mt">
                       <a href="index.html">
@@ -36,7 +32,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="general.php">
+                      <a class="active" href="meetthedoc.php">
                         <i class="fa fa-user-md" aria-hidden="true"></i>
                           <span>Meet The Doc!</span>
                       </a>
@@ -92,7 +88,7 @@
 								</div>
                 <div class="btn-group btn-group-justified">
 									<div class="btn-group">
-    								<a href="general.php" class="btn btn-primary btn-lg" role="button"><i class="fa fa-user-md" aria-hidden="true"></i> Semua</a>
+    								<a href="meetthedoc.php" class="btn btn-primary btn-lg" role="button"><i class="fa fa-user-md" aria-hidden="true"></i> Semua</a>
   								</div>
   								<div class="btn-group">
     								<a href="#" class="btn btn-success btn-lg" role="button"><i class="fa fa-stethoscope" aria-hidden="true"></i> Umum</a>

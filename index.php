@@ -46,9 +46,8 @@
       <!-- Transparent Navbar -->
       <div id="nav-header" class="container clearfix">
         <img alt="Hello, Doc!" class="pull-left" src="img/Login/Logo.png" width="160" height="100">
-        <button id="login_button" class="on-login btn btn-link form-switch pull-right"
-        data-form="login-page" data-toggle="modal"  style="background-color:#52e829; color: #fff; border:1px solid;"
-        data-label="top-right" href="index.php#signinModal" style="margin">sign in</button>
+        <a class="btn btn-default page-scroll" style="background-color:#52e829; color: #fff; border:1px solid; margin-left:700px; margin-top:20px;" href="index.php#services">our services</a>
+        <a class="on-login btn btn-link form-switch" data-form="login-page" data-toggle="modal" style="background-color:#52e829; color: #fff; border:1px solid; margin-left:20px; margin-top:20px;" href="index.php#signinModal">sign in</a>
       </div>
 
       <!-- Logo -->
@@ -234,12 +233,95 @@
                 </form>
 		          </div>
 		          <!-- modal -->
-
-
-		      </form>
-
+		</form>
 	  	</div>
-	  </div>
+        </div>
+
+<br><br><br><br>
+<section id="services" class="services-section">
+                <div class="col-sm-4">
+                	<div class="showback" style="background:#0C3">
+                    <i class="fa fa-comments-o fa-5x" aria-hidden="true"></i>
+          <h2 style="color:#FFF">Consultation</h2>
+          <p style="color:#FFF">Anda dapat berkonsultasi untuk penyakit yang Anda derita kapanpun dan di manapun. Kami bekerja sama dengan banyak dokter di Indonesia untuk memberikan solusi atas penyakit Anda.</p>
+          <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal2" style="background:#09F">Bagaimana Caranya?</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header" style="background:#09F">
+						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						        <h4 class="modal-title" id="myModalLabel">Consultation</h4>
+						      </div>
+						      <div class="modal-body" style="background:#0C3">
+                              <p style="color:#FFF">Untuk berkonsultasi, Anda harus masuk (<i>log in</i>) ke dalam sistem Hello, Doc! terlebih dahulu. Setelah Anda masuk ke halaman utama (<i>dashboard</i>), klik <i>Consultation</i> di menu kiri layar. Isikan identitas dan keluhan Anda pada kolom yang tersedia.</p>
+						      </div>
+						      <div class="modal-footer" style="background:#09F">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Mengerti</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+        			</div>
+                </div>
+                <div class="col-sm-4">
+                	<div class="showback" style="background:#0C3">
+                    <i class="fa fa-users fa-5x" aria-hidden="true"></i>
+          <h2 style="color:#FFF">Meet The Doctor</h2>
+          <p style="color:#FFF">Anda dapat mengatur pertemuan dengan dokter tertentu kapanpun dan di manapun. Anda tidak perlu bersusah payah datang terlebih dahulu ke rumah sakit untuk mengatur pertemuan dengan dokter.</p>
+          <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal3" style="background:#09F">Bagaimana Caranya?
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header" style="background:#09F">
+						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						        <h4 class="modal-title" id="myModalLabel">Meet The Doctor</h4>
+						      </div>
+						      <div class="modal-body" style="background:#0C3">
+                              <p style="color:#FFF">Setelah Anda <i>log in</i> ke dalam sistem Hello, Doc!, klik Meet The Doctor di menu kiri layar. Silakan pilih dokter dan atur jadwal pertemuan pada kolom yang tersedia.</p>
+						      </div>
+						      <div class="modal-footer" style="background:#09F">
+						        <button type="button" class="btn btn-default" data-dismiss="modal"">Mengerti</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+        			</div>
+                </div>
+                <div class="col-sm-4">
+                	<div class="showback" style="background:#0C3">
+                    <i class="fa fa-globe fa-5x" aria-hidden="true"></i>
+          <h2 style="color:#FFF">Share With The World</h2>
+          <p style="color:#FFF">Anda dapat membagikan pengalaman Anda dalam menggunakan layanan kami dan berdiskusi dalam forum <i>online</i> yang kami sediakan. Ini dapat membantu Anda mendapatkan wawasan lebih seputar kesehatan.</p>
+          <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal4" style="background:#09F">Bagaimana Caranya?</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header" style="background:#09F">
+						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						        <h4 class="modal-title" id="myModalLabel">Share With The World</h4>
+						      </div>
+						      <div class="modal-body" style="background:#0C3">
+                              <p style="color:#FFF">Setelah Anda <i>log in</i> ke dalam sistem Hello, Doc!, klik Share With The World di menu kiri layar. Silakan <i>post</i> yang Anda ingin sampaikan dan nikmati diskusi-diskusi menarik seputar kesehatan.</p>
+						      </div>
+						      <div class="modal-footer" style="background:#09F">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Mengerti</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+        			</div>
+                </div>
+            </div>
+</section>
+      <!--main content end-->
+
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="js/jquery.js"></script>
@@ -313,6 +395,10 @@
             document.body.appendChild(css);
           };
     </script>
-
+    
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/scrolling-nav.js"></script>
+  <!-- our services -->
+  
   </body>
 </html>

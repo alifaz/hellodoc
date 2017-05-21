@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+<title>Dashboard</title>
 <?php
-	require_once "head-user.php";
-	require_once "header-user.php";
-	//require '../pental.php';
+	require_once "head-doc.php";
+	require_once "header-doc.php";
 		include "../connect.php";
 
 	  $username_cek  = $_SESSION['username'];
 	  $password_cek  = $_SESSION['password'];
 
-	  $query     = mysqli_query($conn, "SELECT * FROM user WHERE user_name = '$username_cek' and password_user = '$password_cek'");
+	  $query     = mysqli_query($conn, "SELECT * FROM doctor WHERE username = '$username_cek' and password = '$password_cek'");
 	  $result    = mysqli_fetch_array($query);
-	  $_SESSION['name'] = $result['name_user'];
+	  $_SESSION['name'] = $result['nama_doctor'];
  ?>
   <body>
 
   <section id="container" >
-		<!togel down>
+		<!Togel Down>
 			<aside>
 			<div id="sidebar"  class="nav-collapse ">
-			  <ul class="sidebar-menu" id="nav-accordion">
+			    <!-- sidebar menu start-->
+			    <ul class="sidebar-menu" id="nav-accordion">
+
 						<p class="centered"><a href="profil-user.php"><img src="opan.jpg" class="img-circle" width="60" height="60"></a></p>
-              	  <h5 class="centered"><?php echo $_SESSION['name']; ?><br>Pasien</h5>
+								<h5 class="centered"><?php echo $_SESSION['name']; ?></h5>
+								<h5 class="centered">Dokter</h5>
+
 			        <li class="mt">
-			            <a class="active" href="dashboard.php">
+			            <a class="active" href="dashboard-doc.php">
 			                <i class="fa fa-dashboard"></i>
 			                <span>Dashboard</span>
 			            </a>
 			        </li>
 
 			        <li class="sub-menu">
-			            <a href="meetthedoc.php">
-			              <i class="fa fa-user-md" aria-hidden="true"></i>
-			                <span>Meet The Doc!</span>
-			            </a>
-			        </li>
-
-			        <li class="sub-menu">
-			            <a href="consultation.php">
+			            <a href="consultation-doc.php">
 			                <i class="fa fa-comments"></i>
 			                <span>Consultation</span>
 			            </a>
@@ -70,7 +67,6 @@
 			    <!-- sidebar menu end-->
 			</div>
 			</aside>
-
 			<!isi dashboard-doc>
       <section id="main-content">
           <section class="wrapper">

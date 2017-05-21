@@ -19,17 +19,21 @@
     $address        = $_POST['address'];
     $biograph       = $_POST['biograph'];
 
+    $id_admin = $_SESSION['id'];
+
     $sql_buat1 = "INSERT INTO user(id_user, name_user, user_name,
       email_user, password_user, Authority, unique_code)
       VALUE('','$name','$username','$email','$pass','$otoritas','$uniquecode')";
 
-    $sql_buat2 = "INSERT INTO doctor(id_doctor, nama_doctor, graduated, birthdate,
+    $sql_buat2 = "INSERT INTO doctor(id_doctor, rsid_admin, nama_doctor, graduated, birthdate,
       gender, specialization, address, biography, username, email, password, uniquecode)
-      VALUE('','$name','$graduated','$birthdate','$gender','$specialization','$address',
+      VALUE('','$id_admin','$name','$graduated','$birthdate','$gender','$specialization','$address',
         '$biograph','$username','$email','$pass','$uniquecode')";
 
+    $result1 = mysqli_query($conn, $sql_buat1);
+    $result2 = mysqli_query($conn, $sql_buat2);
 
-    if (mysqli_query($conn, $sql_buat1) && mysqli_query($conn, $sql_buat2)){
+    if ($result1 and $result2){
 ?>
     <script>document.location.href='../rsadmin/doctorlist.php';</script>
 

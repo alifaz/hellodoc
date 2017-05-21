@@ -1,20 +1,9 @@
-<?php
-include 'konek-user.php';
-  if($_SESSION['status'] == "nouser"){
-    header('Location:login.php');
-  }
-  else{
-      $id = $_SESSION['id'];
-      $query = mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id'");
-      $result = mysqli_fetch_array($query);
- ?>
 <aside>
     <div id="sidebar"  class="nav-collapse ">
-        <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
 
             <p class="centered"><a href="profile.html"><img src="opan.jpg" class="img-circle" width="60"></a></p>
-            <h5 class="centered"><!?php echo $result['name_user']?><br>Pasien</h5>
+            <h5 class="centered">Opan<br>Pasien</h5>
 
             <li class="mt">
                 <a href="index.html">
@@ -60,9 +49,5 @@ include 'konek-user.php';
             </li>
 
         </ul>
-        <!-- sidebar menu end-->
     </div>
 </aside>
-<?php
-}
-?>

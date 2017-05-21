@@ -12,6 +12,6 @@
 <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
 
 <!-- Custom styles for this template -->
-<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/style-d.css" rel="stylesheet">
 <link href="assets/css/style-responsive.css" rel="stylesheet">
 </head>

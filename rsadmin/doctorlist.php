@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello, Doc! || Doctor Registration</title>
+    <title>Hello, Doc! || Doctor List</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 
             <div class="top-menu">
             	<ul class="nav pull-right top-menu clearfix">
-                    <li><a class="logout" href="index.php" style="background-color:#f45350; color: #fff;
+                    <li><a class="logout" href="../access/logout.php" style="background-color:#f45350; color: #fff;
                       border:1px solid; border-radius: 4px; margin: 12px;"><b>Logout</b></a></li>
             	</ul>
             </div>
@@ -76,9 +76,6 @@
                                 </span>
                             </div>
                             <!-- /input-group -->
-                        </li>
-                				<li>
-                          	<a href="admindashboard.php"><i class="fa fa-dashboard fa-fw"></i>   Dashboard</a>
                         </li>
 												<li>
                             <a href="doctorlist.php"><i class="glyphicon glyphicon-plus"></i>  Doctor List</a>
@@ -105,42 +102,54 @@
                     </div>
 
                     <!-- Doctor List -->
-                    <div style="width: 80%; margin: auto;">
+                    <div>
                   	<table class="table centered">
                   	<tr>
                   		<th>No</th>
                   		<th>Name</th>
-											<th>Username<th>
                   		<th>Email</th>
 											<th>Password</th>
 											<th>Unique Code</th>
-                      <th>Specialization</th>
                   		<th colspan="2">Menu</th>
                   	</tr>
                   <?php
                   	$count = 1;
 
-                    $query = mysqli_query($conn, "SELECT * FROM doctor");
+									//	$query    = mysqli_query($conn, "SELECT * FROM rsAdmin");
+									//	$ID_admin = mysqli_fetch_array($query);
+									//	$id_admin = $ID_admin['rsid_admin'];
+									$id_adminrs = $_SESSION['id'];
+                  $query1 = mysqli_query($conn, "SELECT * FROM doctor WHERE rsid_admin = '$id_adminrs'");
 
-                  	while($result = mysqli_fetch_assoc($query)){
+					//$query = mysqli_fetch_assoc($query1);
+					//echo $query['nama_doctor'];
+				//	echo $query['rsid_admin'];
+					//echo $id_adminrs;
+					//$query=$query['rsid_admin'];
+					if(mysqli_num_rows($query1) > 0){
+						while($row = mysqli_fetch_assoc($query1)){
+							echo
+								'<tr>
+									<td>'.$count++.'</td>
+									<td>'.$row["nama_doctor"].'</td>
+									<td>'.$row["email"].'</td>
+									<td>'.$row["password"].'</td>
+									<td>'.$row["uniquecode"].'</td>
+									<form action="../rsadmin/adminedit.php" method="post">
+										<td><button value="'.$row["id_doctor"].'" name="edit" type="submit" class="btn btn-primary">Edit</button></td>
+									</form>
+									<form action="../access/deleteproccess.php" method="post">
+										<td><button value="'.$row["id_doctor"].'" name="delete" type="submit" class="btn btn-danger">Delete</button></td>
+									</form>
+								</tr>';
+						}
+					}
 
-                  		'<tr>
-                  			<td>'.$count++.'</td>
-                  			<td>'.$result['nama_doctor'].'</td>
-                  			<td>'.$result['username'].'</td>
-                  			<td>'.$result['email'].'</td>
-												<td>'.$result['password'].'</td>
-												<td>'.$result['uniquecode'].'</td>
-												<td>'.$result['specialization'].'</td>
-                  			<td><a href="edit.php?id='.$result['rsid_admin'].'"><button type="button" class="btn btn-primary">Edit</button></a></td>
-                  			<td><a href="deleteproses.php?id='.$result['rsid_admin'].'"><button type="button" class="btn btn-danger">Delete</button></td>
-                  		</tr>';
-                  	}
                   ?>
                   	</table>
                   	</div>
                     <div class="container-fluid bg-2 text-center">
-                        <a href="doctorregistration.php?id='.$result['rsid_admin'].'"><button type="button" class="btn btn-primary">
+                        <a href="doctorregistration.php?id='.$query['rsid_admin'].'"><button type="button" class="btn btn-primary">
 													<span class="glyphicon glyphicon-pencil"></span>  Register A Doctor, Now!</button></a>
                     </div>
 
