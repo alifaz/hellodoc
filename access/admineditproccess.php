@@ -27,14 +27,12 @@
 
     if ($cek == 2){
 ?>
-    <script language="javascript">alert("Register Sukses");</script>
     <script>document.location.href='../rsadmin/doctorlist.php';</script>
 
 <?php
     }
     else{
 ?>
-    <script language="javascript">alert("Register Failed");</script>
     <script>document.location.href='../rsadmin/adminedit.php';</script>
 
 <?php
