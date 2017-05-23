@@ -6,12 +6,14 @@
 	//require '../pental.php';
 		include "../connect.php";
 
+
 	  $username_cek  = $_SESSION['username'];
 	  $password_cek  = $_SESSION['password'];
 
 	  $query     = mysqli_query($conn, "SELECT * FROM user WHERE user_name = '$username_cek' and password_user = '$password_cek'");
 	  $result    = mysqli_fetch_array($query);
 	  $_SESSION['name'] = $result['name_user'];
+
  ?>
   <body>
 
@@ -49,8 +51,8 @@
 			                <span>Share With The World!</span>
 			            </a>
 			            <ul class="sub">
-			                <li><a  href="blank.html">Post a Thread</a></li>
-			                <li><a  href="login.html">Forum</a></li>
+			                <li><a  href="thread.php">Forum</a></li>
+			                <li><a  href="your-thread.php">Your Thread</a></li>
 			            </ul>
 			        </li>
 
@@ -60,13 +62,17 @@
 			                <span>Settings</span>
 			            </a>
 			            <ul class="sub">
-			                <li><a  href="form_component.html">Profile</a></li>
-			                <li><a  href="form_component.html">Account</a></li>
-			            </ul>
-			        </li>
-
-
-			    </ul>
+			                <?php
+							if ($_SESSION['authority']=="Patient")
+							{ ?>
+							  <li><a  href="profilepatient.php">Profile</a></li>
+							<?php }
+							else if ($_SESSION['authority']=="Doctor"){
+								 ?>
+								<li><a  href="profiledoctor.php">Profile</a></li>
+								<?php
+							}?>
+							</ul>
 			    <!-- sidebar menu end-->
 			</div>
 			</aside>

@@ -37,35 +37,40 @@
 					</li>
 
 					<li class="sub-menu">
-								<a class="active" href="consultation.php">
+							<a class="active" href="consultation.php">
 									<i class="fa fa-comments"></i>
 									<span>Consultation</span>
 							</a>
 					</li>
 
-            <li class="sub-menu">
-                <a href="javascript:;" >
-                    <i class="fa fa-globe"></i>
-                    <span>Share With The World!</span>
-                </a>
-                <ul class="sub">
-                    <li><a  href="blank.html">Post a Thread</a></li>
-                    <li><a  href="login.html">Forum</a></li>
-                </ul>
-            </li>
+					<li class="sub-menu">
+							<a  href="javascript:;" >
+									<i class="fa fa-globe"></i>
+									<span>Share With The World!</span>
+							</a>
+							<ul class="sub">
+									<li><a  href="thread.php">Forum</a></li>
+									<li><a  href="your-thread.php">Your Thread</a></li>
+							</ul>
+					</li>
 
-            <li class="sub-menu">
-                <a href="javascript:;" >
-                    <i class="fa fa-cogs"></i>
-                    <span>Settings</span>
-                </a>
-                <ul class="sub">
-                    <li><a  href="form_component.html">Profile</a></li>
-                    <li><a  href="form_component.html">Account</a></li>
-                </ul>
-            </li>
-
-        </ul>
+					<li class="sub-menu">
+							<a href="javascript:;" >
+									<i class="fa fa-cogs"></i>
+									<span>Settings</span>
+							</a>
+							<ul class="sub">
+									<?php
+					if ($_SESSION['authority']=="Patient")
+					{ ?>
+						<li><a  href="profilepatient.php">Profile</a></li>
+					<?php }
+					else if ($_SESSION['authority']=="Doctor"){
+						 ?>
+						<li><a  href="profiledoctor.php">Profile</a></li>
+						<?php
+					}?>
+					</ul>
     </div>
 </aside>
 <!tabel konsultasi>

@@ -9,9 +9,9 @@
 	  $username_cek  = $_SESSION['username'];
 	  $password_cek  = $_SESSION['password'];
 
-	  $query     = mysqli_query($conn, "SELECT * FROM doctor WHERE username = '$username_cek' and password = '$password_cek'");
-	  $result    = mysqli_fetch_array($query);
-	  $_SESSION['name'] = $result['nama_doctor'];
+		$query     = mysqli_query($conn, "SELECT * FROM user WHERE user_name = '$username_cek' and password_user = '$password_cek'");
+ 	 	$result    = mysqli_fetch_array($query);
+ 	 	$_SESSION['name'] = $result['name_user'];
  ?>
   <body>
 
@@ -22,9 +22,8 @@
 			    <!-- sidebar menu start-->
 			    <ul class="sidebar-menu" id="nav-accordion">
 
-						<p class="centered"><a href="profil-user.php"><img src="opan.jpg" class="img-circle" width="60" height="60"></a></p>
-								<h5 class="centered"><?php echo $_SESSION['name']; ?></h5>
-								<h5 class="centered">Dokter</h5>
+						<p class="centered"><a href="profile.html"><img src="opann.jpg" class="img-circle" width="60"></a></p>
+						<h5 class="centered"><?php echo $_SESSION['name'];?><br>Dokter</h5>
 
 			        <li class="mt">
 			            <a class="active" href="dashboard-doc.php">
@@ -40,14 +39,14 @@
 			            </a>
 			        </li>
 
-			        <li class="sub-menu">
+							<li class="sub-menu">
 			            <a href="javascript:;" >
 			                <i class="fa fa-globe"></i>
 			                <span>Share With The World!</span>
 			            </a>
 			            <ul class="sub">
-			                <li><a  href="blank.html">Post a Thread</a></li>
-			                <li><a  href="login.html">Forum</a></li>
+			                <li><a  href="thread.php">Forum</a></li>
+			                <li><a  href="your-thread.php">Your Thread</a></li>
 			            </ul>
 			        </li>
 
@@ -57,13 +56,17 @@
 			                <span>Settings</span>
 			            </a>
 			            <ul class="sub">
-			                <li><a  href="form_component.html">Profile</a></li>
-			                <li><a  href="form_component.html">Account</a></li>
-			            </ul>
-			        </li>
-
-
-			    </ul>
+			                <?php
+							if ($_SESSION['authority']=="Patient")
+							{ ?>
+							  <li><a  href="profilepatient.php">Profile</a></li>
+							<?php }
+							else if ($_SESSION['authority']=="Doctor"){
+								 ?>
+								<li><a  href="profiledoctor.php">Profile</a></li>
+								<?php
+							}?>
+							</ul>
 			    <!-- sidebar menu end-->
 			</div>
 			</aside>

@@ -10,14 +10,15 @@
 	  $result    = mysqli_fetch_array($query);
 	  $_SESSION['name'] = $result['name_user'];
 
-		$id_doctor_cek    = $_POST['edit'];
+		$_SESSION['id_doctor']    = $_POST['edit'];
+		$id_doctor_cek = $_SESSION['id_doctor'];
 
 		$query = mysqli_query($conn, "SELECT * FROM doctor where id_doctor = $id_doctor_cek");
 		$data = mysqli_fetch_array($query);
 		if($data['id_doctor']){
 			$_SESSION['id_doctor'] = $data['id_doctor'];
-
 		}
+		$doc = $data['nama_doctor']
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,42 +46,46 @@
                   </a>
                 </li>
 
-                <li class="sub-menu">
-                  <a href="consultation.php" >
-                    <i class="fa fa-comments" aria-hidden="true"></i>
-                    <span>Consultation</span>
-                  </a>
-                </li>
+								<li class="sub-menu">
+				            <a href="consultation.php">
+				                <i class="fa fa-comments"></i>
+				                <span>Consultation</span>
+				            </a>
+				        </li>
 
-                <li class="sub-menu">
-                  <a href="javascript:;" >
-                    <i class="fa fa-globe"></i>
-                    <span>Share With The World!</span>
-                  </a>
-                  <ul class="sub">
-                    <li><a  href="blank.html">Post a Thread</a></li>
-                    <li><a  href="login.html">Forum</a></li>
-                  </ul>
-                </li>
+				        <li class="sub-menu">
+				            <a href="javascript:;" >
+				                <i class="fa fa-globe"></i>
+				                <span>Share With The World!</span>
+				            </a>
+				            <ul class="sub">
+				                <li><a  href="thread.php">Forum</a></li>
+				                <li><a  href="your-thread.php">Your Thread</a></li>
+				            </ul>
+				        </li>
 
-                <li class="sub-menu">
-                  <a href="javascript:;" >
-                    <i class="fa fa-cogs"></i>
-                    <span>Settings</span>
-                  </a>
-                	<ul class="sub">
-                    <li><a  href="form_component.html">Profile</a></li>
-										<li><a  href="form_component.html">Account</a></li>
-                    </ul>
-                </li>
-
-            </ul>
+				        <li class="sub-menu">
+				            <a href="javascript:;" >
+				                <i class="fa fa-cogs"></i>
+				                <span>Settings</span>
+				            </a>
+				            <ul class="sub">
+				                <?php
+								if ($_SESSION['authority']=="Patient")
+								{ ?>
+								  <li><a  href="profilepatient.php">Profile</a></li>
+								<?php }
+								else if ($_SESSION['authority']=="Doctor"){
+									 ?>
+									<li><a  href="profiledoctor.php">Profile</a></li>
+									<?php
+								}?>
+								</ul>
           </div>
       </aside>
-
+<section id="main-content">
 			<! Profil Dokter>
-      <section id="main-content">
-          <section class="wrapper">
+			  <section class="wrapper">
       		<div class="row mt">
       			<div class="col-md-6">
       				<div class="showback">
@@ -93,7 +98,7 @@
                       <img src="opann.jpg" class="media-object img-circle" style="width:150px">
                     </div>
                   <div class="media-body"><br>
-                      <h2 class="media-heading"><?php echo $data['nama_doctor'] ?></h2>
+                      <h2 class="media-heading"><?php echo $doc ?></h2>
                       <p>Spesialis Jantung</p>
                   </div>
                 </div>
@@ -102,8 +107,6 @@
                   <div class="form-group">
                     <label class="control-label col-sm-2" for="email">Email:</label>
                       <div class="col-sm-10"><p class="form-control-static"><?php echo $data['email'] ?></p></div>
-                    <label class="control-label col-sm-2" for="email">Umur:</label>
-                      <div class="col-sm-10"><p class="form-control-static">42 Tahun</p></div>
                     <label class="control-label col-sm-2" for="email">Gender:</label>
                       <div class="col-sm-10"><p class="form-control-static"><?php echo $data['gender'] ?></p></div>
                     <label class="control-label col-sm-2" for="email">Kota:</label>
@@ -124,8 +127,9 @@
                 <div class="form-group">
                     <label for="comment"><h4>Keluhan Singkat :</h4></label>
 										<form action="../access/konsul-proses.php" method="post">
-											<textarea name="keluhan" class="form-control" rows="2" id="comment" maxlength="140" placeholder="Tulis keluhan anda.."></textarea>
-											<td><button type="submit" class="btn btn-success" data-toggle="modal" data-target="#kirimkonsul">Kirim</button></td>
+											<textarea name="keluhan" class="form-control" rows="2" id="comment" maxlength="140" placeholder="Tulis keluhan anda.." required></textarea>
+											<span class="help-block">max 140 karakter</span>
+											<br><button type="submit" value="'$data['id_doctor']'" name="edit" class="btn btn-success">Kirim</button>
 										</form>
 
                 </div>
@@ -134,7 +138,7 @@
           </div>
           </section>
       </section><!-- /MAIN CONTENT -->
-			<!-- Modal -->
+			<!-- Modal
 			<div class="modal fade" id="kirimkonsul" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -150,7 +154,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
       <!--main content end-->
       <!--footer start-->
 			<?php

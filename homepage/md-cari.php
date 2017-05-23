@@ -10,6 +10,8 @@
 	$query     = mysqli_query($conn, "SELECT * FROM user WHERE user_name = '$username_cek' and password_user = '$password_cek'");
 	$result    = mysqli_fetch_array($query);
 	$_SESSION['name'] = $result['name_user'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +33,7 @@
             </li>
 
             <li class="sub-menu">
-                <a class="active" href="general.php">
+                <a class="active" href="meetthedoc.php">
                   <i class="fa fa-user-md" aria-hidden="true"></i>
                     <span>Meet The Doc!</span>
                 </a>
@@ -43,6 +45,13 @@
                     <span>Consultation</span>
                 </a>
             </li>
+
+						<li class="sub-menu">
+								<a href="consultation.php">
+										<i class="fa fa-comments"></i>
+										<span>Consultation</span>
+								</a>
+						</li>
 
 						<li class="sub-menu">
 								<a href="javascript:;" >
@@ -72,8 +81,6 @@
 							<?php
 						}?>
 						</ul>
-
-        </ul>
     </div>
 </aside>
 
@@ -88,37 +95,41 @@
       						<h1>Spesialisasi Dokter</h1>
                 	<p>Temukan dokter berdasarkan spesialisasi!</p>
 								</div>
-
 								<!search>
 								<form  method="post" action="md-cari.php">
-									<h5>Cari Spesialisasi Dokter</h5>
+									<h5>Cari Spesialisasi</h5>
 									<div class="form-group row mt">
 										<div class="col-xs-3">
-								    	<input type="text" class="form-control" name="search" placeholder="Cari..">
+								    	<input type="text" class="form-control" placeholder="Tuliskan spesialisasi dokter..">
 										</div>
 										<button type="submit" value="Submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Cari
 										</button>
 								 	</div>
 								</form>
 
+
+
 								<! list dokter >
 
-								<ul class="list-group">
+                <div class="list-group">
 									<?php
-											$count = 1;
-											$query1 = mysqli_query($conn, "SELECT * FROM doctor");
-											if(mysqli_num_rows($query1) > 0){
-											while($row = mysqli_fetch_assoc($query1)){
-											echo '<li href="profil-dokter.php" class="list-group-item">
-											<img src="opann.jpg" class="img-circle" alt="Foto Profil" width="60" height="60"> Dr. '
-											.$row["nama_doctor"].'<br>
+                  $term = mysqli_real_escape_string($conn,$_REQUEST['search']);
+
+                  $sql = "SELECT * FROM doctor WHERE nama_doctor LIKE '%".$term."%'";
+                  $r_query = mysqli_query($conn,$sql);
+
+                  $count = 1;
+                  while ($data = mysqli_fetch_array($r_query,MYSQLI_ASSOC)){
+											echo '<a href="profil-dokter.php" class="list-group-item">
+                      <img src="opann.jpg" class="img-circle" alt="Foto Profil" width="60" height="60">
+                      '.$data["nama_doctor"].'
 											<form action="profil-dokter.php" method="post">
-												<td><button value="'.$row["id_doctor"].'" name="edit" type="submit" class="btn btn-primary">Buka Profil</button></td>
-											</form></li>';
+												<button value="'.$data["id_doctor"].'" name="edit" type="submit" class="btn btn-primary">Buka Profil</button>
+											</form></a>';
 											$count++;
-											}}
+                    }
 									?>
-								</ul>
+								</div>
 
 							</div>
 							</div>

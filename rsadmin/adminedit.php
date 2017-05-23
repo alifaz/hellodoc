@@ -210,13 +210,14 @@
 										      <label for="email">Email:</label>
 										      <input type="email" class="form-control disabled" maxlength="36" name="email" id="email" placeholder="Update Your Email"
 													value="<?php echo $data['email'] ?>" disabled>
+													<input type="hidden" name="email2" value="<?php echo $data['email'] ?>">
 										    </div>
 												<div class="form-group">
 										      <label for="uniquecode">Unique Code:</label>
 										      <input type="text" class="form-control" maxlength="10" name="uniquecode" id="uniquecode" placeholder="Input Your Unique Code"
 													value="<?php echo $data['uniquecode'] ?>" disabled>
 										    </div>
-													<center><button type="submit" class="btn btn-primary" >Change Data</button></center>
+													<center><button type="submit" name="edit" class="btn btn-primary" >Change Data</button></center>
 										  </form>
 
                   	</div>

@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.6.5.2
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: 22 Mei 2017 pada 15.40
+- Versi Server: 10.1.21-MariaDB
+- PHP Version: 7.0.16
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="hellodoc" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="authority">
+                CREATE TABLE `authority` (
+                  `id` int(1) NOT NULL AUTO_INCREMENT,
+                  `Level` varchar(30) NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="comment">
+                CREATE TABLE `comment` (
+                  `id_komen` int(255) NOT NULL AUTO_INCREMENT,
+                  `id_thread` int(255) NOT NULL,
+                  `username` varchar(20) NOT NULL,
+                  `nameuser` varchar(50) NOT NULL,
+                  `isi` text NOT NULL,
+                  PRIMARY KEY (`id_komen`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="doctor">
+                CREATE TABLE `doctor` (
+                  `id_doctor` int(255) NOT NULL AUTO_INCREMENT,
+                  `rsid_admin` varchar(100) NOT NULL,
+                  `nama_doctor` varchar(100) NOT NULL,
+                  `graduated` varchar(100) NOT NULL,
+                  `birthdate` date NOT NULL,
+                  `gender` varchar(100) NOT NULL,
+                  `specialization` varchar(100) NOT NULL,
+                  `address` text NOT NULL,
+                  `biography` text NOT NULL,
+                  `username` varchar(100) NOT NULL,
+                  `email` varchar(100) NOT NULL,
+                  `password` varchar(100) NOT NULL,
+                  `uniquecode` varchar(100) NOT NULL,
+                  PRIMARY KEY (`id_doctor`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="konsultasi">
+                CREATE TABLE `konsultasi` (
+                  `id_konsultasi` int(11) NOT NULL AUTO_INCREMENT,
+                  `id_user` int(50) NOT NULL,
+                  `id_doctor` int(50) NOT NULL,
+                  `keluhan` varchar(140) NOT NULL,
+                  `nama_doctor` varchar(50) NOT NULL,
+                  `name_user` varchar(50) NOT NULL,
+                  `status` varchar(5) NOT NULL,
+                  PRIMARY KEY (`id_konsultasi`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="rsadmin">
+                CREATE TABLE `rsadmin` (
+                  `rsid_admin` int(100) NOT NULL AUTO_INCREMENT,
+                  `admin_name` varchar(50) NOT NULL,
+                  `email_admin` varchar(50) NOT NULL,
+                  `password_admin` varchar(50) NOT NULL,
+                  `unique_code` varchar(52) NOT NULL,
+                  PRIMARY KEY (`rsid_admin`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="rumahsakit">
+                CREATE TABLE `rumahsakit` (
+                  `id_rs` int(200) NOT NULL AUTO_INCREMENT,
+                  `nama_rs` varchar(100) NOT NULL,
+                  `special_code` varchar(50) NOT NULL,
+                  PRIMARY KEY (`id_rs`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="thread">
+                CREATE TABLE `thread` (
+                  `id_thread` int(255) NOT NULL AUTO_INCREMENT,
+                  `username` varchar(20) NOT NULL,
+                  `nameuser` varchar(50) NOT NULL,
+                  `authority` int(5) NOT NULL,
+                  `isi` text NOT NULL,
+                  `judul` text NOT NULL,
+                  PRIMARY KEY (`id_thread`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+            </pma:table>
+            <pma:table name="user">
+                CREATE TABLE `user` (
+                  `id_user` int(255) NOT NULL AUTO_INCREMENT,
+                  `name_user` varchar(50) NOT NULL,
+                  `user_name` varchar(30) NOT NULL,
+                  `email_user` varchar(50) NOT NULL,
+                  `password_user` varchar(32) NOT NULL,
+                  `Authority` int(2) NOT NULL,
+                  `unique_code` varchar(32) NOT NULL,
+                  PRIMARY KEY (`id_user`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'hellodoc'
+    -->
+    <database name="hellodoc">
+        <!-- Tabel authority -->
+        <table name="authority">
+            <column name="id">1</column>
+            <column name="Level">superadmin</column>
+        </table>
+        <table name="authority">
+            <column name="id">2</column>
+            <column name="Level">admin</column>
+        </table>
+        <table name="authority">
+            <column name="id">3</column>
+            <column name="Level">dokter</column>
+        </table>
+        <table name="authority">
+            <column name="id">4</column>
+            <column name="Level">pasien</column>
+        </table>
+        <!-- Tabel comment -->
+        <table name="comment">
+            <column name="id_komen">5</column>
+            <column name="id_thread">1</column>
+            <column name="username">nmlinda</column>
+            <column name="nameuser">nur meilinda</column>
+            <column name="isi">Arsenal kalah mulu!
+Dasar cupu!</column>
+        </table>
+        <table name="comment">
+            <column name="id_komen">6</column>
+            <column name="id_thread">1</column>
+            <column name="username">nmlinda</column>
+            <column name="nameuser">nur meilinda</column>
+            <column name="isi">tessss
+
+tsss</column>
+        </table>
+        <table name="comment">
+            <column name="id_komen">7</column>
+            <column name="id_thread">1</column>
+            <column name="username">nmlinda</column>
+            <column name="nameuser">nur meilinda</column>
+            <column name="isi">real
+kalah
+mulu</column>
+        </table>
+        <table name="comment">
+            <column name="id_komen">8</column>
+            <column name="id_thread">2</column>
+            <column name="username">nmlinda</column>
+            <column name="nameuser">nur meilinda</column>
+            <column name="isi">alig alig</column>
+        </table>
+        <!-- Tabel doctor -->
+        <table name="doctor">
+            <column name="id_doctor">3</column>
+            <column name="rsid_admin">2</column>
+            <column name="nama_doctor">ramadhan akhbatullah</column>
+            <column name="graduated">IPB</column>
+            <column name="birthdate">1998-03-09</column>
+            <column name="gender">on</column>
+            <column name="specialization">on</column>
+            <column name="address">balebak 4 jalan 36</column>
+            <column name="biography">fresh graduate from IPB Veteriner</column>
+            <column name="username">alba</column>
+            <column name="email">alba@gmail.com</column>
+            <column name="password">alba</column>
+            <column name="uniquecode">alba</column>
+        </table>
+        <table name="doctor">
+            <column name="id_doctor">4</column>
+            <column name="rsid_admin">2</column>
+            <column name="nama_doctor">tes</column>
+            <column name="graduated">tes</column>
+            <column name="birthdate">0000-00-00</column>
+            <column name="gender">on</column>
+            <column name="specialization">on</column>
+            <column name="address">q3r2r</column>
+            <column name="biography">f3</column>
+            <column name="username">gw4g</column>
+            <column name="email">nmlinda97@gmail.com</column>
+            <column name="password">hehe</column>
+            <column name="uniquecode">hehe</column>
+        </table>
+        <table name="doctor">
+            <column name="id_doctor">5</column>
+            <column name="rsid_admin">6</column>
+            <column name="nama_doctor">Dokter</column>
+            <column name="graduated">ipb</column>
+            <column name="birthdate">0000-00-00</column>
+            <column name="gender">on</column>
+            <column name="specialization">on</column>
+            <column name="address">Bogor</column>
+            <column name="biography">Jaya</column>
+            <column name="username">dokter</column>
+            <column name="email">dokter@gmail.com</column>
+            <column name="password">d22af4180eee4bd95072eb90f94930e5</column>
+            <column name="uniquecode">d22af4180eee4bd95072eb90f94930e5</column>
+        </table>
+        <!-- Tabel konsultasi -->
+        <table name="konsultasi">
+            <column name="id_konsultasi">1</column>
+            <column name="id_user">0</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">hahahah</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user"></column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">2</column>
+            <column name="id_user">0</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">heheheh</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user"></column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">3</column>
+            <column name="id_user">0</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">testes
+</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user"></column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">4</column>
+            <column name="id_user">0</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">tttt</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user"></column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">5</column>
+            <column name="id_user">0</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">hhhaaa</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user"></column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">6</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">cobcaoa</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">7</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">huhuh</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">8</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">hihi</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">9</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">tetot</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">10</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">test
+</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">11</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">kenapa</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">12</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">bbb</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">13</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">kenapa gabisa</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">14</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">knpp</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">15</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">3</column>
+            <column name="keluhan">mmm</column>
+            <column name="nama_doctor">ramadhan akhbatullah</column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">16</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">0</column>
+            <column name="keluhan">bisa pasti</column>
+            <column name="nama_doctor"></column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">17</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">3</column>
+            <column name="keluhan">bisaaaaaaaaaaaaaaaaaaaaaaa</column>
+            <column name="nama_doctor">ramadhan akhbatullah</column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <table name="konsultasi">
+            <column name="id_konsultasi">18</column>
+            <column name="id_user">27</column>
+            <column name="id_doctor">4</column>
+            <column name="keluhan">kkkkkkkk</column>
+            <column name="nama_doctor">tes</column>
+            <column name="name_user">nur meilinda</column>
+            <column name="status">yet</column>
+        </table>
+        <!-- Tabel rsadmin -->
+        <table name="rsadmin">
+            <column name="rsid_admin">2</column>
+            <column name="admin_name">bagus P</column>
+            <column name="email_admin">bagus.p@gmail.com</column>
+            <column name="password_admin">17b38fc02fd7e92f3edeb6318e3066d8</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="rsadmin">
+            <column name="rsid_admin">4</column>
+            <column name="admin_name">rian</column>
+            <column name="email_admin">rian@gmail.com</column>
+            <column name="password_admin">cb2b28afc2cc836b33eb7ed86f99e65a</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="rsadmin">
+            <column name="rsid_admin">5</column>
+            <column name="admin_name">noer widya</column>
+            <column name="email_admin">noer.widya@gmail.com</column>
+            <column name="password_admin">17265dfa6d3fe81bd1aedc4d7968fc60</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="rsadmin">
+            <column name="rsid_admin">6</column>
+            <column name="admin_name">bagus</column>
+            <column name="email_admin">bagus@gmail.com</column>
+            <column name="password_admin">17b38fc02fd7e92f3edeb6318e3066d8</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="rsadmin">
+            <column name="rsid_admin">7</column>
+            <column name="admin_name"></column>
+            <column name="email_admin">bagus@gmail.com</column>
+            <column name="password_admin">17b38fc02fd7e92f3edeb6318e3066d8</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="rsadmin">
+            <column name="rsid_admin">8</column>
+            <column name="admin_name"></column>
+            <column name="email_admin">bagus@gmail.com</column>
+            <column name="password_admin">17b38fc02fd7e92f3edeb6318e3066d8</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="rsadmin">
+            <column name="rsid_admin">9</column>
+            <column name="admin_name">linda</column>
+            <column name="email_admin">nmlinda97@gmail.com</column>
+            <column name="password_admin">529ca8050a00180790cf88b63468826a</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="rsadmin">
+            <column name="rsid_admin">10</column>
+            <column name="admin_name">linda</column>
+            <column name="email_admin">nmlinda97@gmail.com</column>
+            <column name="password_admin">529ca8050a00180790cf88b63468826a</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <!-- Tabel rumahsakit -->
+        <table name="rumahsakit">
+            <column name="id_rs">1</column>
+            <column name="nama_rs">RS Palang Merah Indonesia</column>
+            <column name="special_code">01-RSPMI</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">2</column>
+            <column name="nama_rs">RS Karya Bhakti</column>
+            <column name="special_code">02-RSKB</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">3</column>
+            <column name="nama_rs">RS PGI Cikini</column>
+            <column name="special_code">03-PGIC</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">4</column>
+            <column name="nama_rs">RS Cipto Mangunkusumo</column>
+            <column name="special_code">04-CM</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">5</column>
+            <column name="nama_rs">RS Fatmawati</column>
+            <column name="special_code">05-F</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">6</column>
+            <column name="nama_rs">RS Husada</column>
+            <column name="special_code">06-H</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">7</column>
+            <column name="nama_rs">RS Islam Bogor</column>
+            <column name="special_code">07-IB</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">8</column>
+            <column name="nama_rs">RS Meilia</column>
+            <column name="special_code">08-M</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">9</column>
+            <column name="nama_rs">RS Medirossa Cikarang</column>
+            <column name="special_code">09-MC</column>
+        </table>
+        <table name="rumahsakit">
+            <column name="id_rs">10</column>
+            <column name="nama_rs">RS Kencana</column>
+            <column name="special_code">10-K</column>
+        </table>
+        <!-- Tabel thread -->
+        <table name="thread">
+            <column name="id_thread">1</column>
+            <column name="username">opan</column>
+            <column name="nameuser">opan</column>
+            <column name="authority">0</column>
+            <column name="isi">Arsenal Football Club (dikenal pula sebagai Arsenal atau The Gunners) adalah klub sepak bola profesional Inggris yang berbasis di daerah Holloway, London. didirikan pada 1886 dengan nama Dial Square. Klub ini bermain di Liga Utama Inggris yang termasuk salah satu klub tersukses di sepak bola Inggris, yang telah memenangkan 13 gelar kasta utama Liga Inggris (10 pada era Divisi Pertama dan 3 pada era Premier League) dan 12 gelar di Piala FA. Arsenal memegang rekor untuk periode terpanjang berada di kasta puncak Liga Inggris tanpa pernah terdegradasi sejak musim 1919 dan menjadi tim pada peringkat pertama dalam klasemen Liga Inggris sepanjang abad ke-20.[2] Arsenal menjadi tim kedua di Inggris yang menyelesaikan semusim liga tanpa kalah (musim 2003â€“04) dan tim pertama yang melakukannya pada era di mana satu musim berlangsung 38 pertandingan.&lt;br&gt;&lt;br&gt;
+
+Arsenal didirikan pada 1886 di Woolwich dan pada tahun 1893 menjadi klub pertama dari selatan Inggris untuk bergabung dengan Football League. Pada tahun 1913, hal itu bergerak ke utara melintasi kota Stadion Arsenal di Highbury. Pada 1930, klub telah memenangkan lima gelar Liga Championship dan dua Piala FA. Setelah periode bersandar pada tahun-tahun pasca-perang itu memenangkan Liga dan Piala FA ganda, di musim 1970-71, dan pada 1990-an dan dekade pertama abad ke-21 memenangkan dua gelar ganda dan mencapai Final Liga Champions UEFA 2006.&lt;br&gt;
+
+Arsenal memiliki persaingan lama dengan tim sesama London Utara Tottenham Hotspur, dengan kontes North London derby. Arsenal adalah klub sepak bola terkaya keempat di dunia pada tahun 2013, senilai lebih dari $13 miliar.[3] Di kancah Premier League, Arsenal termasuk salah satu tim yang tidak pernah terdegradasi.[4] Arsenal merupakan tim sepak bola pertama yang memperkenalkan penggunaan angka pada jersey.</column>
+            <column name="judul">Arsenal F.C.</column>
+        </table>
+        <table name="thread">
+            <column name="id_thread">2</column>
+            <column name="username">opan</column>
+            <column name="nameuser">opan</column>
+            <column name="authority">0</column>
+            <column name="isi">Institut Pertanian Bogor adalah sebuah perguruan tinggi pertanian negeri yang berkedudukan di Bogor.
+
+Sebelum diresmikan pada tahun 1963, IPB adalah sebuah fakultas pertanian pada Universitas Indonesia. Pada tanggal 1 September 1963.[2] Presiden Pertama Indonesia, Ir Soekarno, melakukan peletakkan batu pertama pembangunan kampus sekaligus menandai peresmian Insitut Pertanian Bogor sebagai sebuah perguruan tinggi mandiri.
+
+Saat ini Rektor IPB untuk periode 2013-2018 adalah Prof. Dr. Ir. Herry Suhardiyanto, M.Sc.[2]
+
+Berdasarkan hasil keputusan rapat pleno Badan Akreditasi Nasional Perguruan Tinggi (BAN-PT) tanggal 21 Februari 2013, BAN-PT memutuskan bahwa Institut Pertanian Bogor (IPB) memperoleh status terakreditasi dengan Nilai 375 yaitu peringkat A (sangat baik).[3][4]</column>
+            <column name="judul">Institut Pertanian Bogor</column>
+        </table>
+        <table name="thread">
+            <column name="id_thread">13</column>
+            <column name="username">nmlinda</column>
+            <column name="nameuser">nur meilinda</column>
+            <column name="authority">4</column>
+            <column name="isi">Republik Indonesia (RI), umumnya disebut Indonesia, adalah negara di Asia Tenggara yang dilintasi garis khatulistiwa dan berada di antara benua Asia dan Australia serta antara Samudra Pasifik dan Samudra Hindia. Indonesia adalah negara kepulauan terbesar di dunia yang terdiri dari 13.466 pulau,[6] nama alternatif yang biasa dipakai adalah Nusantara.[7] Dengan populasi lebih dari 258 juta jiwa pada tahun 2016,[8] Indonesia adalah negara berpenduduk terbesar keempat di dunia dan negara yang berpenduduk Muslim terbesar di dunia, dengan lebih dari 207 juta jiwa.[9] Bentuk pemerintahan Indonesia adalah republik, dengan Dewan Perwakilan Rakyat, Dewan Perwakilan Daerah dan Presiden yang dipilih secara langsung.
+
+Ibu kota negara Indonesia ialah Jakarta. Indonesia berbatasan darat dengan Malaysia di Pulau Kalimantan, dengan Papua Nugini di Pulau Papua dan dengan Timor Leste di Pulau Timor. Negara tetangga lainnya adalah Singapura, Filipina, Australia, dan wilayah persatuan Kepulauan Andaman dan Nikobar di India.
+
+Sejarah Indonesia banyak dipengaruhi oleh bangsa lainnya. Kepulauan Indonesia menjadi wilayah perdagangan penting setidaknya sejak abad ke-7, yaitu ketika Kerajaan Sriwijaya di Palembang menjalin hubungan agama dan perdagangan dengan Tiongkok dan India. Kerajaan-kerajaan Hindu dan Buddha telah tumbuh pada awal abad Masehi, diikuti para pedagang yang membawa agama Islam, serta berbagai kekuatan Eropa yang saling bertempur untuk memonopoli perdagangan rempah-rempah Maluku semasa era penjelajahan samudra. Setelah berada di bawah penjajahan Belanda, Indonesia yang saat itu bernama Hindia Belanda menyatakan kemerdekaannya di akhir Perang Dunia II. Selanjutnya Indonesia mendapat berbagai hambatan, ancaman dan tantangan dari bencana alam, korupsi, separatisme, proses demokratisasi dan periode perubahan ekonomi yang pesat.
+
+Dari Sabang sampai Merauke, Indonesia terdiri dari berbagai suku bangsa, bahasa, dan agama. Berdasarkan rumpun bangsa (ras), Indonesia terdiri atas bangsa asli pribumi yakni Mongoloid Selatan/Austronesia dan Melanesia di mana bangsa Austronesia yang terbesar jumlahnya dan lebih banyak mendiami Indonesia bagian barat. Secara lebih spesifik, suku bangsa Jawa adalah suku bangsa terbesar dengan populasi mencapai 41,7% dari seluruh penduduk Indonesia.[10] Semboyan nasional Indonesia, &quot;Bhinneka tunggal ika&quot; (&quot;Berbeda-beda namun tetap satu&quot;), berarti keberagaman yang membentuk negara. Selain memiliki populasi padat dan wilayah yang luas, Indonesia memiliki wilayah alam yang mendukung tingkat keanekaragaman hayati terbesar kedua di dunia.
+
+Indonesia juga anggota dari PBB dan satu-satunya anggota yang pernah keluar dari PBB, yaitu pada tanggal 7 Januari 1965, dan bergabung kembali pada tanggal 28 September 1966 dan Indonesia tetap dinyatakan sebagai anggota yang ke-60, keanggotaan yang sama sejak bergabungnya Indonesia pada tanggal 28 September 1950. Selain PBB, Indonesia juga merupakan anggota dari ASEAN, KAA, APEC, OKI, G-20 dan akan menjadi anggota dari OECD.</column>
+            <column name="judul">Indonesia</column>
+        </table>
+        <!-- Tabel user -->
+        <table name="user">
+            <column name="id_user">5</column>
+            <column name="name_user">alif</column>
+            <column name="user_name">alif</column>
+            <column name="email_user">alif@gmail.com</column>
+            <column name="password_user">e10adc3949ba59abbe56e057f20f883e</column>
+            <column name="Authority">4</column>
+            <column name="unique_code">e10adc3949ba59abbe56e057f20f883e</column>
+        </table>
+        <table name="user">
+            <column name="id_user">6</column>
+            <column name="name_user">bagus P</column>
+            <column name="user_name">bagus P</column>
+            <column name="email_user">bagus.p@gmail.com</column>
+            <column name="password_user">17b38fc02fd7e92f3edeb6318e3066d8</column>
+            <column name="Authority">2</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="user">
+            <column name="id_user">7</column>
+            <column name="name_user">bagus P</column>
+            <column name="user_name">bagus P</column>
+            <column name="email_user">bagus.p@gmail.com</column>
+            <column name="password_user">17b38fc02fd7e92f3edeb6318e3066d8</column>
+            <column name="Authority">2</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="user">
+            <column name="id_user">8</column>
+            <column name="name_user">rian</column>
+            <column name="user_name">rian</column>
+            <column name="email_user">rian@gmail.com</column>
+            <column name="password_user">cb2b28afc2cc836b33eb7ed86f99e65a</column>
+            <column name="Authority">2</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="user">
+            <column name="id_user">9</column>
+            <column name="name_user">vito iman</column>
+            <column name="user_name">vito</column>
+            <column name="email_user">vito@gmail.com</column>
+            <column name="password_user">31b70b3e803fb9bc82590f45e7a5f66d</column>
+            <column name="Authority">3</column>
+            <column name="unique_code">31b70b3e803fb9bc82590f45e7a5f66d</column>
+        </table>
+        <table name="user">
+            <column name="id_user">10</column>
+            <column name="name_user">andhika kartika rahayu</column>
+            <column name="user_name">andhijes</column>
+            <column name="email_user">ankarayu@gmail.com</column>
+            <column name="password_user">4e4d6c332b6fe62a63afe56171fd3725</column>
+            <column name="Authority">4</column>
+            <column name="unique_code">6ef95621c960af17372d1145d69af6c8</column>
+        </table>
+        <table name="user">
+            <column name="id_user">11</column>
+            <column name="name_user">andhika kartika rahayu</column>
+            <column name="user_name">andhikey</column>
+            <column name="email_user">haha@gmail.com</column>
+            <column name="password_user">4e4d6c332b6fe62a63afe56171fd3725</column>
+            <column name="Authority">4</column>
+            <column name="unique_code">6ef95621c960af17372d1145d69af6c8</column>
+        </table>
+        <table name="user">
+            <column name="id_user">16</column>
+            <column name="name_user">ramadhan akhbatullah</column>
+            <column name="user_name">alba</column>
+            <column name="email_user">alba@gmail.com</column>
+            <column name="password_user">alba</column>
+            <column name="Authority">3</column>
+            <column name="unique_code">alba</column>
+        </table>
+        <table name="user">
+            <column name="id_user">20</column>
+            <column name="name_user">noer widya</column>
+            <column name="user_name">noer widya</column>
+            <column name="email_user">noer.widya@gmail.com</column>
+            <column name="password_user">17265dfa6d3fe81bd1aedc4d7968fc60</column>
+            <column name="Authority">2</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="user">
+            <column name="id_user">21</column>
+            <column name="name_user">wewewe</column>
+            <column name="user_name">wqwqwqwq</column>
+            <column name="email_user">wewewewe@gmail.com</column>
+            <column name="password_user">123456</column>
+            <column name="Authority">3</column>
+            <column name="unique_code">123456</column>
+        </table>
+        <table name="user">
+            <column name="id_user">22</column>
+            <column name="name_user">Nuh Satria</column>
+            <column name="user_name">Nuhsat</column>
+            <column name="email_user">Nuhsat@gmail.com</column>
+            <column name="password_user">Nuhsat</column>
+            <column name="Authority">3</column>
+            <column name="unique_code">Nuhsat</column>
+        </table>
+        <table name="user">
+            <column name="id_user">24</column>
+            <column name="name_user">bagus</column>
+            <column name="user_name">bagus</column>
+            <column name="email_user">bagus@gmail.com</column>
+            <column name="password_user">17b38fc02fd7e92f3edeb6318e3066d8</column>
+            <column name="Authority">2</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="user">
+            <column name="id_user">27</column>
+            <column name="name_user">nur meilinda</column>
+            <column name="user_name">nmlinda</column>
+            <column name="email_user">nmlinda97@gmail.com</column>
+            <column name="password_user">529ca8050a00180790cf88b63468826a</column>
+            <column name="Authority">4</column>
+            <column name="unique_code">529ca8050a00180790cf88b63468826a</column>
+        </table>
+        <table name="user">
+            <column name="id_user">28</column>
+            <column name="name_user">linda</column>
+            <column name="user_name">linda</column>
+            <column name="email_user">nmlinda97@gmail.com</column>
+            <column name="password_user">529ca8050a00180790cf88b63468826a</column>
+            <column name="Authority">2</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="user">
+            <column name="id_user">29</column>
+            <column name="name_user">linda</column>
+            <column name="user_name">linda</column>
+            <column name="email_user">nmlinda97@gmail.com</column>
+            <column name="password_user">529ca8050a00180790cf88b63468826a</column>
+            <column name="Authority">2</column>
+            <column name="unique_code">d41d8cd98f00b204e9800998ecf8427e</column>
+        </table>
+        <table name="user">
+            <column name="id_user">30</column>
+            <column name="name_user">tes</column>
+            <column name="user_name">gw4g</column>
+            <column name="email_user">nmlinda97@gmail.com</column>
+            <column name="password_user">hehe</column>
+            <column name="Authority">3</column>
+            <column name="unique_code">hehe</column>
+        </table>
+        <table name="user">
+            <column name="id_user">31</column>
+            <column name="name_user">opan</column>
+            <column name="user_name">opan</column>
+            <column name="email_user">opan@gmail.com</column>
+            <column name="password_user">2ab03492b2fee1bb56686a84a5f8d16a</column>
+            <column name="Authority">4</column>
+            <column name="unique_code">2ab03492b2fee1bb56686a84a5f8d16a</column>
+        </table>
+        <table name="user">
+            <column name="id_user">32</column>
+            <column name="name_user">Dokter</column>
+            <column name="user_name">dokter</column>
+            <column name="email_user">dokter@gmail.com</column>
+            <column name="password_user">d22af4180eee4bd95072eb90f94930e5</column>
+            <column name="Authority">3</column>
+            <column name="unique_code">d22af4180eee4bd95072eb90f94930e5</column>
+        </table>
+    </database>
+</pma_xml_export>
