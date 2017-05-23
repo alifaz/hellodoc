@@ -9,8 +9,13 @@
 
   $query     = mysqli_query($conn, "SELECT * FROM user WHERE user_name = '$username_cek' and password_user = '$password_cek'");
   $result    = mysqli_fetch_array($query);
+<<<<<<< HEAD
 
 
+=======
+ 
+  
+>>>>>>> origin
  // $username = $result['user_name'];
   //$email = $result['email_user'];
   //$name = $result['name_user'];
@@ -77,7 +82,11 @@
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
+<<<<<<< HEAD
 				<?php
+=======
+				<?php 
+>>>>>>> origin
 					if ($_SESSION['authority']=="Patient")
 				{ ?>
                    <p class="centered"><a href="profilepatient.php"><img src="opan.jpg" class="img-circle" width="60" height="60"></a></p>
@@ -94,19 +103,28 @@
 				  <h5 class="centered"><?php echo $_SESSION['authority']; ?></h5>
 
                   <li class="mt">
+<<<<<<< HEAD
                       <a href="dashboard.php">
+=======
+                      <a href="homepage.php">
+>>>>>>> origin
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
+<<<<<<< HEAD
                       <a href="meetthedoc.php">
+=======
+                      <a href="general.php">
+>>>>>>> origin
                         <i class="fa fa-user-md" aria-hidden="true"></i>
                           <span>Meet The Doc!</span>
                       </a>
                   </li>
 
+<<<<<<< HEAD
 									<li class="sub-menu">
 					            <a href="consultation.php">
 					                <i class="fa fa-comments"></i>
@@ -142,6 +160,49 @@
 										<?php
 									}?>
 									</ul>
+=======
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-comments"></i>
+                          <span>Consultation</span>
+                      </a>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-globe"></i>
+                          <span>Share With The World!</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="blank.html">Post a Thread</a></li>
+                          <li><a  href="login.html">Forum</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Settings</span>
+                      </a>
+                      <ul class="sub">
+                        <?php 
+						if ($_SESSION['authority']=="Patient")
+						{ ?>
+                          <li><a  href="profilepatient.php">Profile</a></li>
+						<?php }
+						else if ($_SESSION['authority']=="Doctor") 
+						{ ?>
+							<li><a  href="profiledoctor.php">Profile</a></li>
+						<?php }
+						else 
+						{ ?>
+							<li><a  href="profileadmin.php">Profile</a></li>
+						<?php } ?>
+						<li><a  href="change-pass.php">Password</a></li>
+                      </ul>
+                  </li>
+
+>>>>>>> origin
 
               </ul>
               <!-- sidebar menu end-->
@@ -168,7 +229,11 @@
 															<label class="col-sm-2 col-sm-2 control-label">Username</label>
 															<div class="col-sm-10">
 																	<input type="text" class="form-control" name="username "value="<?php echo $result['user_name'] ?>">
+<<<<<<< HEAD
 															</div>
+=======
+															</div> 
+>>>>>>> origin
 													</div> -->
 													<div class="form-group">
 															<label class="col-sm-2 col-sm-2 control-label">Email</label>
@@ -188,14 +253,22 @@
 																		<input type="text" class="form-control">
 																</div>
 														</div>
+<<<<<<< HEAD
 
+=======
+														
+>>>>>>> origin
 														<div class="form-group">
 																<label class="col-sm-2 col-sm-2 control-label" value="<?php/* echo $data['graduated'] */?>">Almamater</label>
 																<div class="col-sm-10">
 																		<input type="text" class="form-control">
 																</div>
 														</div>
+<<<<<<< HEAD
 
+=======
+													
+>>>>>>> origin
 														<div class="form-group">
 																<label for="gender" class="col-sm-2 col-sm-2 control-label">Gender</label>
 																<div class="col-sm-10">
@@ -253,7 +326,11 @@
 																<div class="col-sm-10">
 																		<button type="submit" class="btn btn-theme">Save</button>
 																</div>
+<<<<<<< HEAD
 														</div>
+=======
+														</div> 
+>>>>>>> origin
 														</form>
 													</div>
 												</div>

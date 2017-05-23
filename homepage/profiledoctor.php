@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php
+<<<<<<< HEAD
 	require_once "head-doc.php";
 	require_once "header-doc.php";
 	include "../connect.php";
@@ -13,12 +14,90 @@
  ?>
   <body>
 
+=======
+	//session_start();
+	include "../connect.php";
+
+  $username_cek  = $_SESSION['username'];
+  $password_cek  = $_SESSION['password'];
+
+  $query     = mysqli_query($conn, "SELECT * FROM doctor WHERE username = '$username_cek' and password = '$password_cek'");
+  $result    = mysqli_fetch_array($query);
+ 
+  
+ // $username = $result['user_name'];
+  //$email = $result['email_user'];
+  //$name = $result['name_user'];
+  //echo $username;
+  //$birth = $result['name_user'];
+  //$address = $result['name_user'];
+  //$biography = $result['name_user'];
+?>
+
+<html lang="en">
+	<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Dashboard">
+  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+  <title>Profile Setting</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/css/bootstrap.css" rel="stylesheet">
+  <!--external css-->
+  <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  </head>
+  <body>
+
+  <section id="container" >
+      <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+      <!--header start-->
+			<header class="header black-bg">
+							<div class="sidebar-toggle-box">
+									<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+							</div>
+						<!--logo start-->
+						<a href="homepage.php" class="logo"><b>Hello, Doc!</b></a>
+						<!--logo end-->
+						<div class="top-menu">
+							<ul class="nav pull-right top-menu">
+										<li><a class="logout" href="../access/logoutuser.php">Log out</a></li>
+							</ul>
+						</div>
+				</header>
+
+      <!--header end-->
+
+      <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+      <!--sidebar start-->
+>>>>>>> origin
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
+<<<<<<< HEAD
               	<?php
+=======
+              	<?php 
+>>>>>>> origin
 					if ($_SESSION['authority']=="Patient")
 				{ ?>
                    <p class="centered"><a href="profilepatient.php"><img src="opan.jpg" class="img-circle" width="60" height="60"></a></p>
@@ -35,13 +114,18 @@
 				  <h5 class="centered"><?php echo $_SESSION['authority']; ?></h5>
 
                   <li class="mt">
+<<<<<<< HEAD
                       <a href="dashboard-doc.php">
+=======
+                      <a href="homepage.php">
+>>>>>>> origin
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
+<<<<<<< HEAD
 					            <a href="consultation-doc.php">
 					                <i class="fa fa-comments"></i>
 					                <span>Consultation</span>
@@ -76,6 +160,57 @@
 										<?php
 									}?>
 									</ul>
+=======
+                      <a href="general.php">
+                        <i class="fa fa-user-md" aria-hidden="true"></i>
+                          <span>Meet The Doc!</span>
+                      </a>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-comments"></i>
+                          <span>Consultation</span>
+                      </a>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-globe"></i>
+                          <span>Share With The World!</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="blank.html">Post a Thread</a></li>
+                          <li><a  href="login.html">Forum</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Settings</span>
+                      </a>
+                      <ul class="sub">
+                        <?php 
+						if ($_SESSION['authority']=="Patient")
+						{ ?>
+                          <li><a  href="profilepatient.php">Profile</a></li>
+						<?php }
+						else if ($_SESSION['authority']=="Doctor") 
+						{ ?>
+							<li><a  href="profiledoctor.php">Profile</a></li>
+						<?php }
+						else 
+						{ ?>
+							<li><a  href="profileadmin.php">Profile</a></li>
+						<?php } ?>
+						<li><a  href="change-pass.php">Password</a></li>
+                      </ul>
+                  </li>
+
+
+              </ul>
+>>>>>>> origin
               <!-- sidebar menu end-->
           </div>
       </aside>
@@ -120,14 +255,22 @@
 																		<input type="text" class="form-control" name="birthdate" value="<?php echo $result['birthdate'] ?>">
 																</div>
 														</div>
+<<<<<<< HEAD
 
+=======
+														
+>>>>>>> origin
 														<div class="form-group">
 																<label class="col-sm-2 col-sm-2 control-label">Almamater</label>
 																<div class="col-sm-10">
 																		<input type="text" class="form-control" name="graduated" value="<?php echo $result['graduated'] ?>">
 																</div>
 														</div>
+<<<<<<< HEAD
 
+=======
+												
+>>>>>>> origin
 														<div class="form-group">
 																<label for="gender" class="col-sm-2 col-sm-2 control-label">Gender</label>
 																<div class="col-sm-10">
