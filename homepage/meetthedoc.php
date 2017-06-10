@@ -1,8 +1,7 @@
 <?php
-	//require_once '../pental.php';
+	include "../connect.php";
 	require "head-user.php";
 	require "header-user.php";
-	include "../connect.php";
 
 	$username_cek  = $_SESSION['username'];
 	$password_cek  = $_SESSION['password'];
@@ -13,15 +12,14 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Spesialisasi Dokter</title>
+<title>Meet The Doc!</title>
 </header>
 </head>
 <aside>
     <div id="sidebar"  class="nav-collapse ">
         <ul class="sidebar-menu" id="nav-accordion">
-
-            <p class="centered"><a href="profile.html"><img src="opan.jpg" class="img-circle" width="60"></a></p>
-            <h5 class="centered"><?php echo $_SESSION['name']; ?><br>Pasien</h5>
+            <p class="centered"><img src="<?php echo $result['photo_user']?>" class="img-circle" alt="<?php echo $_SESSION['name'] ?>"width="60" height="60"></a></p>
+								<h5 class="centered"><?php echo $_SESSION['name']; ?><br>Pasien</h5>
 
             <li class="mt">
                 <a href="dashboard.php">
@@ -31,7 +29,7 @@
             </li>
 
             <li class="sub-menu">
-                <a class="active" href="general.php">
+                <a class="active" href="meetthedoc.php">
                   <i class="fa fa-user-md" aria-hidden="true"></i>
                     <span>Meet The Doc!</span>
                 </a>
@@ -45,15 +43,16 @@
             </li>
 
 						<li class="sub-menu">
-								<a href="javascript:;" >
-										<i class="fa fa-globe"></i>
-										<span>Share With The World!</span>
-								</a>
-								<ul class="sub">
-										<li><a  href="thread.php">Forum</a></li>
-										<li><a  href="your-thread.php">Your Thread</a></li>
-								</ul>
-						</li>
+			          <a href="javascript:;" >
+			              <i class="fa fa-globe"></i>
+			              <span>Share With The World!</span>
+			          </a>
+			          <ul class="sub">
+			              <li><a  href="thread-new.php">Post a new thread</a></li>
+			              <li><a  href="thread.php">Forum</a></li>
+			              <li><a  href="your-thread.php">Your Thread</a></li>
+			          </ul>
+			      </li>
 
 						<li class="sub-menu">
 								<a href="javascript:;" >
@@ -80,46 +79,76 @@
   <body>
   <section id="container" >
       <section id="main-content">
+
           <section class="wrapper">
       		<div class="row mt">
       			<div class="col-md-12">
       				<div class="showback">
 								<div class="sub-head" style="text-align: center; color:#114017">
-      						<h1>Spesialisasi Dokter</h1>
+      						<h1>Meet The Doc!</h1>
                 	<p>Temukan dokter berdasarkan spesialisasi!</p>
 								</div>
 
 								<!search>
+
+								<div class="row mt">
+									<div class="col-lg-3 col-md-3 col-sm-3">
+										<div class="showback">
 								<form  method="post" action="md-cari.php">
 									<h5>Cari Spesialisasi Dokter</h5>
 									<div class="form-group row mt">
-										<div class="col-xs-3">
-								    	<input type="text" class="form-control" name="search" placeholder="Cari..">
+										<div class="col-xs-8">
+											<input type="text" class="form-control" name="search" placeholder="Cari..">
 										</div>
-										<button type="submit" value="Submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Cari
+										<button type="submit" value="Submit" class="btn btn-info"><i class="glyphicon glyphicon-search"></i> Cari
 										</button>
-								 	</div>
+									</div>
 								</form>
+							</div>
+						</div>
 
-								<! list dokter >
-
-								<ul class="list-group">
+							<! list dokter >
+								<div class="col-lg-9 col-md-9 col-sm-9">
+									<div class="showback">
+								<div class="row" style="padding-left: 10px;">
 									<?php
-											$count = 1;
-											$query1 = mysqli_query($conn, "SELECT * FROM doctor");
-											if(mysqli_num_rows($query1) > 0){
-											while($row = mysqli_fetch_assoc($query1)){
-											echo '<li href="profil-dokter.php" class="list-group-item">
-											<img src="opann.jpg" class="img-circle" alt="Foto Profil" width="60" height="60"> Dr. '
-											.$row["nama_doctor"].'<br>
-											<form action="profil-dokter.php" method="post">
-												<td><button value="'.$row["id_doctor"].'" name="edit" type="submit" class="btn btn-primary">Buka Profil</button></td>
-											</form></li>';
-											$count++;
-											}}
-									?>
-								</ul>
+									  $halaman = 9;
+									  $page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
+									  $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
+									  $result = mysqli_query($conn,"SELECT * FROM doctor ORDER BY id_doctor DESC");
+									  $total = mysqli_num_rows($result);
+									  $pages = ceil($total/$halaman);
+									  $query1 = mysqli_query($conn,"SELECT * FROM doctor ORDER BY id_doctor DESC LIMIT $mulai, $halaman");
+										$count=1;
+										if(mysqli_num_rows($query1) > 0){
+										while($row = mysqli_fetch_assoc($query1)){
+											$query2 = mysqli_query($conn, "SELECT * FROM user WHERE user_name='$row[username]'");
+											$result2 = mysqli_fetch_array($query2);
+											echo '
+												<div class="col-lg-3 col-md-3 col-sm-3 mb weather-2 pn" style="margin: 0px 10px 10px 10px">
+												<div class="row centered" style="padding-top: 10px;">
+													<img src="'.$result2['photo_user'].'" class="img-circle" alt="Foto Profil" width="100" height="100">
+													<h4 class="mt"><b>Dr. '.$row["nama_doctor"].'</b></h4>
+														<h6>'.$row["specialization"].'</h6>
+													<form action="profil-dokter.php" method="post">
+														<td><button value="'.$row["id_doctor"].'" name="edit" type="submit" class="btn btn-small btn-primary">Buat konsultasi</button></td>
+													</form>
+												</div>
+												</div>';
 
+										$count++;
+										}}
+									  ?>
+										</div>
+									  	<div class="pagination">
+									  		<?php for ($i=1; $i<=$pages ; $i++){ ?>
+									  			<li><a href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+									 		</div>
+									  	<?php } ?>
+
+							</div>
+						</div>
+					</div>
 							</div>
 							</div>
           </div>

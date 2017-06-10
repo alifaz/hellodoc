@@ -2,9 +2,10 @@
 <html lang="en">
 <title>Consultation</title>
 <?php
+
+	include "../connect.php";
 	require_once "head-doc.php";
 	require_once "header-doc.php";
-		include "../connect.php";
 
 		$username_cek  = $_SESSION['username'];
 	  $password_cek  = $_SESSION['password'];
@@ -18,8 +19,10 @@
 		$id = $_SESSION['id'];
 
 		$query1 = mysqli_query($conn, "SELECT * FROM doctor WHERE username = '$id'");
-		$query2 = mysqli_query($conn, "SELECT * FROM konsultasi WHERE nama_doctor = '$nama' ");
-		$query3 = mysqli_query($conn, "SELECT * FROM konsultasi WHERE id_user = '$id' ");
+		$result1 = mysqli_fetch_array($query1);
+		$id_doc = $result1['id_doctor'];
+		$query2 = mysqli_query($conn, "SELECT * FROM konsultasi WHERE id_doctor = '$id_doc' ORDER BY id_konsultasi DESC");
+		$query3 = mysqli_query($conn, "SELECT * FROM konsultasi WHERE id_doctor = '$id_doc' ORDER BY id_konsultasi DESC");
  ?>
 
 
@@ -29,8 +32,8 @@
     <div id="sidebar"  class="nav-collapse ">
         <ul class="sidebar-menu" id="nav-accordion">
 
-            <p class="centered"><a href="profile.html"><img src="opann.jpg" class="img-circle" width="60"></a></p>
-						<h5 class="centered"><?php echo $nama;?><br>Dokter</h5>
+            <p class="centered"><img src="<?php echo $result['photo_user']?>" class="img-circle" alt="<?php echo $_SESSION['name'] ?>"width="60" height="60"></a></p>
+								<h5 class="centered"><?php echo $_SESSION['name']; ?><br>Dokter</h5>
             <li class="mt">
                 <a href="dashboard-doc.php">
                     <i class="fa fa-dashboard"></i>
@@ -46,15 +49,16 @@
             </li>
 
 						<li class="sub-menu">
-								<a href="javascript:;" >
-										<i class="fa fa-globe"></i>
-										<span>Share With The World!</span>
-								</a>
-								<ul class="sub">
-										<li><a  href="thread.php">Forum</a></li>
-										<li><a  href="your-thread.php">Your Thread</a></li>
-								</ul>
-						</li>
+			          <a href="javascript:;" >
+			              <i class="fa fa-globe"></i>
+			              <span>Share With The World!</span>
+			          </a>
+			          <ul class="sub">
+			              <li><a  href="thread-new.php">Post a new thread</a></li>
+			              <li><a  href="thread.php">Forum</a></li>
+			              <li><a  href="your-thread.php">Your Thread</a></li>
+			          </ul>
+			      </li>
 
 						<li class="sub-menu">
 								<a href="javascript:;" >
@@ -86,11 +90,11 @@
 												<h2 class="centered">Daftar Konsultasi</h2>
 													<thead>
 													<tr>
-															<th><h5>No</h5></th>
-															<th><h5>Pasien</h5></th>
-															<th><h5>Keluhan Singkat<h5></th>
-															<th><h5>Status</h5></th>
-															<th><h5>Konfirmasi</h5></th>
+															<th><h4>No</h4></th>
+															<th><h4>Pasien</h4></th>
+															<th><h4>Keluhan Singkat<h4></th>
+															<th><h4>Status</h4></th>
+															<th colspan="2"><h4>Menu</h4></th>
 													</tr>
 													</thead>
 													<tbody>
@@ -101,59 +105,130 @@
 																if($result3['status']=="yet"){
 																echo '<tr>
 																<td class="hide-on-med-and-down">'.$count++.'</td>
-																<td>'.$result3['name_user'].'</td>
+																<td><a href="profil-user.php?id='.$result3['id_user'].'">'.$result3['name_user'].'</a></td>
 																<td>'.$result3['keluhan'].'</td>
 																<td><h4><span class="label label-warning">Menunggu konfirmasi</h4></span></td>
 																<td>
-																<form action="../access/terima-proses.php" method="post">
+																<form class="form-horizontal style-form" action="../access/terima-proses.php" method="post">
 																	<button value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-success btn-md">
-																	<i class="fa fa-check "></i> Terima</button>
-																</form>
-																<form action="../access/tolak-proses.php" method="post">
-																	<button value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-danger btn-md">
-																	<i class="fa fa-ban "></i> Tolak</button>
-																</form>
+																		<i class="fa fa-check"></i> Terima</button>
+																		</form>
+																	</td><td>
+																	<button class="btn btn-danger" data-toggle="modal" data-target="#tolak">
+																		<i class="fa fa-times"></i> Tolak</button>
+
 																</td>
-															</tr>';
+
+														</div>
+														</td>
+														</tr>
+
+														<div class="modal fade" id="tolak" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+															<div class="modal-dialog">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+																		<h4 class="modal-title" id="myModalLabel">Decline Consultation</h4>
+																	</div>
+																	<div class="modal-body">
+																		<p>Are you sure want to decline?</p>
+																	<div class="modal-footer">
+																		<form action="../access/tolak-proses.php" method="post">
+																			<button value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-primary">Yes</button>
+																		</form>
+																		<button data-dismiss="modal" class="btn btn-danger">No</a>
+																	</div>
+																</div>
+															</div>
+														</div>';
 														}
 														else if($result3['status']=="terima"){
-																			echo '<tr>
-																			<td class="hide-on-med-and-down">'.$count++.'</td>
-																			<td>'.$result3['name_user'].'</td>
-																			<td>'.$result3['keluhan'].'</td>
-																			<td><h4><span class="label label-success">Diterima</h4></span></td>
-																			<td>
-																				<a href="chat-doc.php" value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-primary">
-																				<i class="fa fa-comments-o "></i> Hubungi</a>
-																				<form action="../access/batal-doc-proses.php" method="post">
-																					<button value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-warning">
-																					<i class="fa fa-trash-o "></i> Hapus</button>
-																				</form>
-																			</td>
-																		</tr>';
-																	}
-														else if($result3['status']=="tolak"){
-															echo '<tr>
+															echo '<tr class="success">
 															<td class="hide-on-med-and-down">'.$count++.'</td>
-															<td>'.$result3['name_user'].'</td>
+															<td><a href="profil-user.php?id='.$result3['id_user'].'">'.$result3['name_user'].'</a></td>
+															<td>'.$result3['keluhan'].'</td>
+															<td><h4><span class="label label-success">Diterima</h4></span></td>
+															<td>
+															<form action="pesan.php?id='.$result3['id_konsultasi'].'" method="post">
+																<button name="id_konsultasi" type="submit" class="btn btn-primary">
+																	<i class="fa fa-comments-o "></i> Hubungi
+																</button>
+															</form></td>
+															<td>
+																<button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#hapusl">
+																  <i class="fa fa-trash-o"></i>
+																</button>
+															</td>
+															</div>
+
+															</tr>
+
+															<div class="modal fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+															  <div class="modal-dialog">
+															    <div class="modal-content">
+															      <div class="modal-header">
+															        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+															        <h4 class="modal-title" id="myModalLabel">Delete Consultation</h4>
+															      </div>
+															      <div class="modal-body">
+									                    <p>Are you sure want to delete?</p>
+															      <div class="modal-footer">
+																			<form action="../access/batal-doc-proses.php" method="post">
+																				<button value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-warning">
+																					Yes
+																				</button>
+																			</form>
+															      </div>
+															    </div>
+															  </div>
+															</div>';
+														}
+														else if($result3['status']=="tolak"){
+															echo '<tr class="danger">
+															<td class="hide-on-med-and-down">'.$count++.'</td>
+															<td><a href="profil-user.php?id="'.$result3['id_user'].'>'.$result3['name_user'].'</a></td>
 															<td>'.$result3['keluhan'].'</td>
 															<td><h4><span class="label label-danger">Ditolak</h4></span></td>
 															<td>
-															<form action="../access/batal-doc-proses.php" method="post">
-																<button value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-warning">
-																<i class="fa fa-trash-o "></i> Hapus</button>
-															</form>
+															<td>
+																<button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#hapus">
+																  <i class="fa fa-trash-o"></i>
+																</button>
 															</td>
-															</tr>';
+															</div>
+															</td>
+															</tr>
+
+															<div class="modal fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+															  <div class="modal-dialog">
+															    <div class="modal-content">
+															      <div class="modal-header">
+															        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+															        <h4 class="modal-title" id="myModalLabel">Delete Consultation</h4>
+															      </div>
+															      <div class="modal-body">
+									                    <p>Are you sure want to delete?</p>
+															      <div class="modal-footer">
+																			<form action="../access/batal-doc-proses.php" method="post">
+																				<button value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-warning">
+																					Yes
+																				</button>
+																			</form>
+															      </div>
+															    </div>
+															  </div>
+															</div>';
 														}
 														}}
 														else {?>
+																<tr colspan="6"><td>
 															<div class="alert alert-info col-sm-4">
-  															Belum ada konsultasi.
+					  										Saat ini belum ada konsultasi.
 															</div>
-													  <?php
-														 }
-													 ?>
+															</tr></td>
+														<?php
+														}
+														?>
 												</div>
 												</tbody>
                       </table>
@@ -162,23 +237,7 @@
             </div><!-- /row -->
           </section>
       </section>
-			<!-- Modal -->
-			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Menghapus</h4>
-						</div>
-						<div class="modal-body">
-														Menurut penelitian yang dilakukan oleh
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
+
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/jjquery-1.8.3.min.js"></script>

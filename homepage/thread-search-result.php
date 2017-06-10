@@ -4,8 +4,8 @@
 include "../connect.php";
 if ($_SESSION['authority']=="Patient")
 {
-require_once "head.php";
-require_once "header.php";
+require_once "header-user.php";
+require_once "head-user.php";
 }
 else if($_SESSION['authority']=="Doctor")
 {
@@ -15,8 +15,9 @@ require_once "header-doc.php";
 $username_cek  = $_SESSION['username'];
 $password_cek  = $_SESSION['password'];
 
-$query     = mysqli_query($conn, "SELECT * FROM doctor WHERE username = '$username_cek' and password = '$password_cek'");
+$query     = mysqli_query($conn, "SELECT * FROM user WHERE user_name = '$username_cek' and password_user = '$password_cek'");
 $result    = mysqli_fetch_array($query);
+$_SESSION['name'] = $result['name_user'];
 ?>
 
 <html lang="en">
@@ -31,23 +32,19 @@ $result    = mysqli_fetch_array($query);
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-      <?php
-        if ($_SESSION['authority']=="Patient")
-      { ?>
-          <p class="centered"><a href="profilepatient.php"><img src="opan.jpg" class="img-circle" width="60" height="60"></a></p>
-      <?php }
-      else if($_SESSION['authority']=="Doctor")
-      { ?>
-        <p class="centered"><a href="profiledoctor.php"><img src="opan.jpg" class="img-circle" width="60" height="60"></a></p>
-      <?php }
-      else if($_SESSION['authority']=="Admin")
-      { ?>
-        <p class="centered"><a href="profileadmin.php"><img src="opan.jpg" class="img-circle" width="60" height="60"></a></p>
-      <?php } ?>
-                <h5 class="centered"><?php echo $_SESSION['name']; ?></h5>
-                <h5 class="centered"><?php echo $_SESSION['authority']; ?></h5>
+              <p class="centered"><a href="profil-user.php">
+                <img src="<?php echo $result['photo_user']?>" class="img-circle" alt="<?php echo $_SESSION['name'] ?>"width="60" height="60"></a></p>
+                    <h5 class="centered"><?php echo $_SESSION['name']; ?>
+              <?php
+                if ($_SESSION['authority']=="Patient")
+              { ?>
+                  <h5 class="centered">Pasien</h5>
+              <?php }
+              else if($_SESSION['authority']=="Doctor")
+              { ?>
+                  <h5 class="centered">Dokter</h5>
+              <?php }
 
-        <?php
         if ($_SESSION['authority']=="Patient"){?>
           <li class="mt">
               <a href="dashboard.php">
@@ -96,16 +93,17 @@ $result    = mysqli_fetch_array($query);
       }?>
 
 
-        <li class="sub-menu">
-            <a class="active"href="javascript:;" >
-                <i class="fa fa-globe"></i>
-                <span>Share With The World!</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="thread.php">Forum</a></li>
-                <li><a  href="your-thread.php">Your Thread</a></li>
-            </ul>
-        </li>
+      <li class="sub-menu">
+          <a class="active"href="javascript:;" >
+              <i class="fa fa-globe"></i>
+              <span>Share With The World!</span>
+          </a>
+          <ul class="sub">
+              <li><a  href="thread-new.php">Post A new thread</a></li>
+              <li><a  href="thread.php">Forum</a></li>
+              <li><a  href="your-thread.php">Your Thread</a></li>
+          </ul>
+      </li>
 
         <li class="sub-menu">
             <a  href="javascript:;" >
@@ -143,7 +141,7 @@ $result    = mysqli_fetch_array($query);
 
 
 									<div class="form-panel">
-									<h4 class="mb"><i class="fa fa-angle-right"></i> Search Result</h4>
+									<h4 class="mb"><i class="fa fa-angle-right"></i> Search Result :</h4>
 									<?php
 											$term = mysqli_real_escape_string($conn,$_REQUEST['search']);
 											$sql = "SELECT * FROM thread WHERE judul LIKE '%".$term."%' OR isi LIKE '%".$term."%'";
@@ -157,6 +155,7 @@ $result    = mysqli_fetch_array($query);
 													<a href="thread-read.php?id='.$data["id_thread"].'" name="id_thread">
 														<td><b>'.$data["judul"].'</b><br></td>
 													</a>
+                          by '.$data['nameuser'].'
 												</div>
 												</tr>';
 											}

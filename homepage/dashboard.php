@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-	require_once "head-user.php";
-	require_once "header-user.php";
-	//require '../pental.php';
 		include "../connect.php";
-
+		require_once "head-user.php";
+		require_once "header-user.php";
 
 	  $username_cek  = $_SESSION['username'];
 	  $password_cek  = $_SESSION['password'];
@@ -13,6 +11,12 @@
 	  $query     = mysqli_query($conn, "SELECT * FROM user WHERE user_name = '$username_cek' and password_user = '$password_cek'");
 	  $result    = mysqli_fetch_array($query);
 	  $_SESSION['name'] = $result['name_user'];
+
+		$_SESSION['id'] = $result['id_user'];
+		$id = $_SESSION['id'];
+
+		$query2 = mysqli_query($conn, "SELECT * FROM konsultasi WHERE id_user = '$id' AND baca_pasien = 1 AND NOT status='yet'");
+		$query3 = mysqli_query($conn, "SELECT * FROM konsultasi WHERE id_user = '$id' AND baca_pasien = 1 AND NOT status='yet'");
 
  ?>
   <body>
@@ -22,7 +26,8 @@
 			<aside>
 			<div id="sidebar"  class="nav-collapse ">
 			  <ul class="sidebar-menu" id="nav-accordion">
-						<p class="centered"><a href="profil-user.php"><img src="opan.jpg" class="img-circle" width="60" height="60"></a></p>
+						<p class="centered"><a href="profil-user.php">
+							<img src="<?php echo $result['photo_user']?>" class="img-circle" alt="<?php echo $_SESSION['name'] ?>"width="60" height="60"></a></p>
               	  <h5 class="centered"><?php echo $_SESSION['name']; ?><br>Pasien</h5>
 			        <li class="mt">
 			            <a class="active" href="dashboard.php">
@@ -45,17 +50,17 @@
 			            </a>
 			        </li>
 
-			        <li class="sub-menu">
-			            <a href="javascript:;" >
-			                <i class="fa fa-globe"></i>
-			                <span>Share With The World!</span>
-			            </a>
-			            <ul class="sub">
-			                <li><a  href="thread.php">Forum</a></li>
-			                <li><a  href="your-thread.php">Your Thread</a></li>
-			            </ul>
-			        </li>
-
+							<li class="sub-menu">
+				          <a href="javascript:;" >
+				              <i class="fa fa-globe"></i>
+				              <span>Share With The World!</span>
+				          </a>
+				          <ul class="sub">
+				              <li><a  href="thread-new.php">Post a new thread</a></li>
+				              <li><a  href="thread.php">Forum</a></li>
+				              <li><a  href="your-thread.php">Your Thread</a></li>
+				          </ul>
+				      </li>
 			        <li class="sub-menu">
 			            <a href="javascript:;" >
 			                <i class="fa fa-cogs"></i>
@@ -78,119 +83,53 @@
 			</aside>
 
 			<!isi dashboard-doc>
-      <section id="main-content">
-          <section class="wrapper">
-      		<div class="row mt">
-      			<div class="col-sm-12">
-                	<div class="showback">
-      					<h4><i class="fa fa-angle-right"></i> Tentang hellodoc.com</h4>
-						<!-- Button trigger modal -->
-						<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
-						  Klik
-						</button>
+			<section id="container" >
+					<section id="main-content">
+							<section class="wrapper">
+								<div class="row mt">
+										<div class="col-md-3">
+											<div class="content-panel">
+												<table class="table table-responsive table-striped table-advance table-hover">
+														<h2 class="centered">Pemberitahuan Konsultasi</h2>
+															<thead>
+															<tr>
+																	<th><h4>No</h4></th>
+																	<th><h4>Doctor</h4></th>
+																	<th><h4>Action</h4></th>
+															</tr>
+															</thead>
+															<tbody>
+																<?php
+																$count = 1;
+																if($result2 = mysqli_fetch_array($query3)){
+																	while($result3 = mysqli_fetch_assoc($query2)){
+																		echo '<tr>
+																		<td class="hide-on-med-and-down">'.$count++.'</td>
+																		<td>'.$result3['nama_doctor'].'</td>
+																		<form class="form-horizontal style-form" action="consultation-patient-lihat.php" method="post">
+																			<div class="form-group">
+																			<div class="col-sm-10">
+																			<td><button value="'.$result3['id_konsultasi'].'" name="id_konsultasi" type="submit" class="btn btn-info btn-md">Lihat</button>
+																		</form>
 
-						<!-- Modal -->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						        <h4 class="modal-title" id="myModalLabel">hellodoc.com</h4>
-						      </div>
-						      <div class="modal-body">
-                              		hellodoc.com adalah sebuah situs yang mempertemukan dokter dari banyak rumah sakit di Indonesia dengan pasien. Pasien dapat berkonsultasi dan mendapatkan solusi atas penyakit yang dideritanya. Dokter dapat menjangkau lebih banyak pasien yang membutuhkan bantuannya. Semua itu dapat dilakukan di sini, hellodoc.com.
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-      				</div><!-- /showback -->
-      			</div>
-
-
-                <div class="col-sm-4">
-                	<div class="showback">
-                    <img class="img-thumbnail" src="diabetes-blood-test.jpg" alt="Generic placeholder image" width="212" height="141">
-          <h2>Diabetes Mengintai Remaja</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal2">Baca Lebih Banyak</button>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						        <h4 class="modal-title" id="myModalLabel">Diabetes Mengintai Remaja</h4>
-						      </div>
-						      <div class="modal-body">
-                              		Menurut penelitian yang dilakukan oleh
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-        			</div>
-                </div>
-                <div class="col-sm-4">
-                	<div class="showback">
-                    <img class="img-thumbnail" src="content-image.jpg" alt="Generic placeholder image" width="200" height="143">
-          <h2>Ayo Cegah Osteoporosis</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal3">Baca Lebih Banyak
-						</button>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						        <h4 class="modal-title" id="myModalLabel">Ayo Cegah Osteoporosis</h4>
-						      </div>
-						      <div class="modal-body">
-                              Osteoporosis adalah penyakit tulang keropos.
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-        			</div>
-                </div>
-                <div class="col-sm-4">
-                	<div class="showback">
-                    <img class="img-thumbnail" src="gangguan-jiwa.jpg" alt="Generic placeholder image" width="280" height="157">
-          <h2>Apa Itu Skizofrenia?</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal4">Baca Lebih Banyak</button>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						        <h4 class="modal-title" id="myModalLabel">Apa Itu Skizofrenia?</h4>
-						      </div>
-						      <div class="modal-body">
-                              		Skizofrenia sering dipertukarkan dengan kepribadian ganda, padahal keduanya sebenarnya berbeda.
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-        			</div>
-                </div>
-            </div>
-           </section>
+																	</tr>';
+																}
+															}
+																else {?>
+																	<div class="alert alert-info">
+																		Tidak ada pemberitahuan konsultasi.
+																	</div>
+																<?php
+																 }
+															 ?>
+														</div>
+														</tbody>
+													</table>
+												</div><!-- /content-panel -->
+										</div><!-- /col-md-12 -->
+								</div><!-- /row -->
+							</section>
+					</section>
       <!--main content end-->
 
       <!footer start-->

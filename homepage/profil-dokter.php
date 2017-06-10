@@ -1,7 +1,8 @@
 <?php
+	include "../connect.php";
 	require_once "head-user.php";
 	require_once "header-user.php";
-		include "../connect.php";
+
 
 	  $username_cek  = $_SESSION['username'];
 	  $password_cek  = $_SESSION['password'];
@@ -15,13 +16,17 @@
 
 		$query = mysqli_query($conn, "SELECT * FROM doctor where id_doctor = $id_doctor_cek");
 		$data = mysqli_fetch_array($query);
+		$username_doc = $data['username'];
+		$query2 = mysqli_query($conn, "SELECT * FROM user WHERE user_name='$username_doc'");
+		$result2 = mysqli_fetch_array($query2);
 		if($data['id_doctor']){
 			$_SESSION['id_doctor'] = $data['id_doctor'];
 		}
-		$doc = $data['nama_doctor']
+		$doc = $data['nama_doctor'];
  ?>
 <!DOCTYPE html>
 <html lang="en">
+<title>Meet the Doc!</title>
   <body>
 
   <section id="container" >
@@ -29,8 +34,8 @@
       <aside>
           <div id="sidebar"  class="nav-collapse ">
             <ul class="sidebar-menu" id="nav-accordion">
-            	  <p class="centered"><a href="profile.html"><img src="opan.jpg" class="img-circle" width="60" height:"60"></a></p>
-            	  <h5 class="centered"><?php echo $_SESSION['name']; ?><br>Pasien</h5>
+            	  <p class="centered"><img src="<?php echo $result['photo_user']?>" class="img-circle" alt="<?php echo $_SESSION['name'] ?>"width="60" height="60"></a></p>
+	              	  <h5 class="centered"><?php echo $_SESSION['name']; ?><br>Pasien</h5>
 
 								<li class="mt">
                   <a href="dashboard.php">
@@ -53,16 +58,17 @@
 				            </a>
 				        </li>
 
-				        <li class="sub-menu">
-				            <a href="javascript:;" >
-				                <i class="fa fa-globe"></i>
-				                <span>Share With The World!</span>
-				            </a>
-				            <ul class="sub">
-				                <li><a  href="thread.php">Forum</a></li>
-				                <li><a  href="your-thread.php">Your Thread</a></li>
-				            </ul>
-				        </li>
+								<li class="sub-menu">
+					          <a href="javascript:;" >
+					              <i class="fa fa-globe"></i>
+					              <span>Share With The World!</span>
+					          </a>
+					          <ul class="sub">
+					              <li><a  href="thread-new.php">Post a new thread</a></li>
+					              <li><a  href="thread.php">Forum</a></li>
+					              <li><a  href="your-thread.php">Your Thread</a></li>
+					          </ul>
+					      </li>
 
 				        <li class="sub-menu">
 				            <a href="javascript:;" >
@@ -95,11 +101,11 @@
 
                 <div class="media">
                   <div class="media-left media-middle ">
-                      <img src="opann.jpg" class="media-object img-circle" style="width:150px">
+                      <img src="<?php echo $result2['photo_user'] ?>" class="media-object img-circle" style="width:150px">
                     </div>
                   <div class="media-body"><br>
                       <h2 class="media-heading"><?php echo $doc ?></h2>
-                      <p>Spesialis Jantung</p>
+                      <p>Spesialis <?php echo $data['specialization']; ?></p>
                   </div>
                 </div>
 
